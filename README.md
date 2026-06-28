@@ -104,7 +104,7 @@ Then open `http://localhost:8000` in your browser.
 ---
 
 ## 👤 Author
-- **Name**: Hetut
+- **Name**: Het Trivedi
 - **Batch**: Web3-Frontends-2026
 - **GitHub Repository**: [https://github.com](https://github.com)
 
