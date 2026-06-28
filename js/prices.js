@@ -216,6 +216,84 @@ function renderSkeletons(container) {
   container.innerHTML = skeletonsHTML;
 }
 
+function drawSparkline(coinId, currentPrice, change24h, logoColor) {
+  const canvas = document.getElementById(`chart-${coinId}`);
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  
+  // Generate realistic sparkline dataset based on current price and 24h change
+  const dataPoints = 24;
+  const pricesData = [];
+  let price = currentPrice / (1 + change24h / 100);
+  pricesData.push(price);
+  
+  const step = (currentPrice - price) / dataPoints;
+  for (let i = 1; i < dataPoints - 1; i++) {
+    // Add random volatility fluctuation
+    const volatility = 1 + (Math.random() - 0.5) * 0.012; // up to 1.2% hourly volatility
+    price += step;
+    pricesData.push(price * volatility);
+  }
+  pricesData.push(currentPrice); // lock final index onto exact current price
+  
+  const labels = Array.from({ length: 24 }, (_, i) => `${i}h`);
+  
+  // Custom gradient fills
+  const gradient = ctx.createLinearGradient(0, 0, 0, 50);
+  gradient.addColorStop(0, `${logoColor}35`);
+  gradient.addColorStop(1, `${logoColor}00`);
+
+  // Destroy previous chart if it exists
+  const existingChart = Chart.getChart(canvas);
+  if (existingChart) {
+    existingChart.destroy();
+  }
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: pricesData,
+        borderColor: logoColor,
+        borderWidth: 1.5,
+        backgroundColor: gradient,
+        fill: true,
+        tension: 0.45,
+        pointRadius: 0,
+        pointHoverRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          mode: 'index',
+          intersect: false,
+          backgroundColor: 'rgba(8, 5, 22, 0.9)',
+          titleColor: '#fff',
+          bodyColor: '#a1a1aa',
+          borderColor: 'rgba(255,255,255,0.08)',
+          borderWidth: 1,
+          callbacks: {
+            label: function(context) {
+              return 'Price: $' + context.parsed.y.toLocaleString('en-US', { minimumFractionDigits: coinId === 'arbitrum' || coinId === 'polygon-ecosystem-token' ? 4 : 2 });
+            }
+          }
+        }
+      },
+      scales: {
+        x: { display: false },
+        y: { display: false }
+      }
+    }
+  });
+}
+
 function renderCoinCards(container, coins) {
   container.innerHTML = ''; // Empty container of skeletons/old cards
 
@@ -238,7 +316,7 @@ function renderCoinCards(container, coins) {
       : `<span class="price-change-badge price-change-negative"><i class="fa-solid fa-caret-down"></i> -${formattedChange}%</span>`;
 
     const card = document.createElement('div');
-    card.className = `glass-card price-card reveal-scale flash-update`;
+    card.className = `glass-card price-card reveal-scale flash-update spotlight-hover`;
     card.setAttribute('data-id', coin.id);
     card.setAttribute('data-name', coin.name.toLowerCase());
     card.setAttribute('data-symbol', coin.symbol.toLowerCase());
@@ -253,10 +331,16 @@ function renderCoinCards(container, coins) {
           <span>${coin.symbol}</span>
         </div>
       </div>
-      <div class="price-body">
+      <div class="price-body" style="position: relative; z-index: 2;">
         <div class="current-price monospace-text">${formattedPrice}</div>
         ${arrow}
       </div>
+      
+      <!-- Chart Sparkline Area -->
+      <div style="width: 100%; height: 60px; margin-top: 15px; margin-bottom: 10px; position: relative; z-index: 1;">
+        <canvas id="chart-${coin.id}" class="sparkline-canvas"></canvas>
+      </div>
+
       <div class="price-card-footer">
         <span>Updated</span>
         <span class="monospace-text">${coin.lastUpdated}</span>
@@ -267,6 +351,11 @@ function renderCoinCards(container, coins) {
     
     // Smooth scroll reveal trigger
     setTimeout(() => card.classList.add('active'), 50);
+    
+    // Render the sparkline graph using Chart.js CDN
+    setTimeout(() => {
+      drawSparkline(coin.id, coin.price, coin.change24h, meta.logoColor);
+    }, 100);
     
     // Clear updating flash class after keyframe completes
     setTimeout(() => {

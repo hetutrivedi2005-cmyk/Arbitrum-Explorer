@@ -204,4 +204,40 @@
   }
 }
 
+/* Timeline & Flowchart Responsive Scaling */
+@media (max-width: 768px) {
+  .how-it-works-flow {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .flow-arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+    animation: pulse-arrow-vert 1.5s infinite alternate;
+  }
+  @keyframes pulse-arrow-vert {
+    0% { transform: scale(1) rotate(90deg) translateY(0); opacity: 0.4; }
+    100% { transform: scale(1.1) rotate(90deg) translateY(5px); opacity: 1; }
+  }
+  
+  .web3-timeline::before {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 0;
+    text-align: left !important;
+  }
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+  .timeline-item:nth-child(even) .timeline-badge,
+  .timeline-item:nth-child(odd) .timeline-badge {
+    left: 6px;
+    right: auto;
+  }
+}
+
+
 

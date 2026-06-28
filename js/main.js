@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initCanvasBackground();
   initScrollAnimations();
   initBackToTop();
+  initScrollProgress();
+  initSpotlightFollower();
+  initCardSpotlights();
+  initHeroCanvas();
 });
 
 /* ==========================================================================
@@ -295,5 +299,153 @@ function initBackToTop() {
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+}
+
+/* ==========================================================================
+   5. PORTAL & SCROLL UTILITIES
+   ========================================================================== */
+
+function initScrollProgress() {
+  const progressBar = document.getElementById('scroll-progress');
+  if (!progressBar) return;
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+    progressBar.style.width = `${progress}%`;
+  });
+}
+
+function initSpotlightFollower() {
+  const follower = document.getElementById('spotlight-follower');
+  if (!follower) return;
+  
+  document.addEventListener('mousemove', (e) => {
+    follower.style.opacity = '1';
+    follower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    follower.style.opacity = '0';
+  });
+}
+
+function initCardSpotlights() {
+  const updateSpotlight = (e) => {
+    const cards = document.querySelectorAll('.glass-card.spotlight-hover');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  };
+  document.addEventListener('mousemove', updateSpotlight);
+}
+
+/* ==========================================================================
+   6. HERO ILLUSTRATION CANVAS (PARTICLE CONNECTOR GRID)
+   ========================================================================== */
+function initHeroCanvas() {
+  const canvas = document.getElementById('nodes-hero-canvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const container = canvas.parentElement;
+  
+  let width = canvas.width = container.clientWidth;
+  let height = canvas.height = container.clientHeight;
+  
+  const particles = [];
+  const particleCount = 18;
+  const connectionDistance = 90;
+  
+  let localMouse = { x: null, y: null, radius: 100 };
+  
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    localMouse.x = e.clientX - rect.left;
+    localMouse.y = e.clientY - rect.top;
+  });
+  
+  container.addEventListener('mouseleave', () => {
+    localMouse.x = null;
+    localMouse.y = null;
+  });
+  
+  window.addEventListener('resize', () => {
+    width = canvas.width = container.clientWidth;
+    height = canvas.height = container.clientHeight;
+  });
+  
+  class HeroParticle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.6;
+      this.vy = (Math.random() - 0.5) * 0.6;
+      this.radius = Math.random() * 2.5 + 1.5;
+      this.color = Math.random() > 0.5 ? 'rgba(0, 242, 254, 0.6)' : 'rgba(139, 92, 246, 0.5)';
+    }
+    
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      
+      if (this.x < 0 || this.x > width) this.vx = -this.vx;
+      if (this.y < 0 || this.y > height) this.vy = -this.vy;
+      
+      if (localMouse.x !== null && localMouse.y !== null) {
+        const dx = this.x - localMouse.x;
+        const dy = this.y - localMouse.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < localMouse.radius) {
+          const force = (localMouse.radius - dist) / localMouse.radius;
+          const angle = Math.atan2(dy, dx);
+          this.x += Math.cos(angle) * force * 1.5;
+          this.y += Math.sin(angle) * force * 1.5;
+        }
+      }
+    }
+    
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new HeroParticle());
+  }
+  
+  function animateHero() {
+    ctx.clearRect(0, 0, width, height);
+    
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+        if (dist < connectionDistance) {
+          const alpha = (1 - (dist / connectionDistance)) * 0.25;
+          ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    
+    requestAnimationFrame(animateHero);
+  }
+  
+  animateHero();
 }
 

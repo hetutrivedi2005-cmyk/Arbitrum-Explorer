@@ -415,16 +415,36 @@
 
       <!-- CONCEPT 1: WEB2 VS WEB3 -->
       <section class="concept-section reveal" id="web2-web3">
-        <div class="glass-card" style="padding: 40px 30px;">
+        <div class="glass-card spotlight-hover" style="padding: 40px 30px;">
           
           <div class="concept-title-bar">
             <i class="fa-solid fa-globe text-gradient"></i>
             <h3>Web2 vs Web3</h3>
           </div>
           
-          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+          <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1rem;">
             Web2 represents the current read-write internet dominated by centralized platforms. Web3 introduces the read-write-own model powered by cryptographic networks.
           </p>
+
+          <!-- Key Takeaway -->
+          <div style="background: rgba(0, 242, 254, 0.03); border: 1px solid rgba(0, 242, 254, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--accent-cyan); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-star"></i> Key Takeaway
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Web2 centralized power and profits in large platforms. Web3 uses decentralized ledgers to give users direct digital ownership and control over their accounts, value, and code.
+            </p>
+          </div>
+
+          <!-- Real World Example -->
+          <div style="background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--text-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-lightbulb"></i> Real-World Example
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              In Web2, you login to Spotify using your Google profile (OAuth), meaning Google controls your identity database. In Web3, you connect to Uniswap using your MetaMask private key, which is globally recognized without requiring anyone's permission.
+            </p>
+          </div>
 
           <!-- Glass Table -->
           <div class="table-wrapper">
@@ -491,6 +511,17 @@
             </div>
           </div>
 
+          <!-- Expandable Deep Dive -->
+          <details style="background: rgba(4, 2, 10, 0.2); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px 20px; cursor: pointer; margin-top: 24px;">
+            <summary style="font-weight: 600; color: var(--accent-cyan); font-size: 0.95rem; outline: none; list-style-type: none; display: flex; justify-content: space-between; align-items: center;">
+              <span>Deep Dive: Smart Contracts Explained</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+            </summary>
+            <div style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; cursor: default;">
+              Smart contracts are self-executing agreements with the terms of the agreement directly written into lines of code. They run on decentralized blockchain networks like Ethereum and Arbitrum. Once deployed, they are immutable and run exactly as written, without requiring any middleman, escrow, or centralized authority. They form the foundation of decentralized finance (DeFi), automated market makers, and NFTs.
+            </div>
+          </details>
+
         </div>
       </section>
 
@@ -507,17 +538,38 @@
 
       <!-- CONCEPT 2: BITCOIN VS ETHEREUM -->
       <section class="concept-section reveal" id="btc-eth">
-        <div class="glass-card" style="padding: 40px 30px;">
+        <div class="glass-card spotlight-hover" style="padding: 40px 30px;">
           
           <div class="concept-title-bar">
             <i class="fa-solid fa-cubes-stacked text-gradient-purple"></i>
             <h3>Bitcoin vs Ethereum</h3>
           </div>
           
-          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+          <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1rem;">
             While both are leading cryptographic networks, Bitcoin was engineered as a decentralized monetary system, whereas Ethereum serves as a decentralized software computer.
           </p>
 
+          <!-- Key Takeaway -->
+          <div style="background: rgba(139, 92, 246, 0.03); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--accent-purple); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-star"></i> Key Takeaway
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Bitcoin acts as a passive ledger storing scarce wealth (digital gold) with very simple scripting rules. Ethereum acts as a dynamic state machine executing complex smart contracts and running decentralized applications.
+            </p>
+          </div>
+
+          <!-- Real World Example -->
+          <div style="background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--text-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-lightbulb"></i> Real-World Example
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              You use Bitcoin like a checking account or vault to hold value securely for years. You use Ethereum like an operating system, interacting with smart contracts to borrow tokens, play games, or execute automated logic.
+            </p>
+          </div>
+
+          <!-- Table -->
           <div class="table-wrapper">
             <table class="concept-table">
               <thead>
@@ -562,6 +614,37 @@
             </table>
           </div>
 
+          <!-- Pros/Cons Grid -->
+          <div class="pros-cons-grid">
+            <div class="pros-box" style="background: rgba(0, 242, 254, 0.01); border-color: rgba(0, 242, 254, 0.15);">
+              <h5 style="color: var(--accent-cyan);"><i class="fa-solid fa-circle-check"></i> Ethereum Scalability Advantages</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Supports layered architectures (L2s like Arbitrum) to scale to thousands of TPS.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Rich ecosystem of developer tools, languages (Solidity/Vyper), and nodes.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Transitioned to environmentally friendly Proof of Stake consensus.</li>
+              </ul>
+            </div>
+            <div class="cons-box" style="background: rgba(139, 92, 246, 0.01); border-color: rgba(139, 92, 246, 0.15);">
+              <h5 style="color: var(--accent-purple);"><i class="fa-solid fa-circle-xmark"></i> Bitcoin Limitations</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-minus" style="color:var(--accent-purple);"></i> Unsuitable for building complex applications due to lack of VM states.</li>
+                <li><i class="fa-solid fa-minus" style="color:var(--accent-purple);"></i> Scaling via L2 (Lightning Network) is limited to simple payments.</li>
+                <li><i class="fa-solid fa-minus" style="color:var(--accent-purple);"></i> Slow transaction confirmation cycle of 10 to 60 minutes.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Expandable Deep Dive -->
+          <details style="background: rgba(4, 2, 10, 0.2); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px 20px; cursor: pointer; margin-top: 24px;">
+            <summary style="font-weight: 600; color: var(--accent-purple); font-size: 0.95rem; outline: none; list-style-type: none; display: flex; justify-content: space-between; align-items: center;">
+              <span>Deep Dive: The EVM (Ethereum Virtual Machine)</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+            </summary>
+            <div style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; cursor: default;">
+              The Ethereum Virtual Machine (EVM) is a decentralized sandboxed runtime environment that compiles and executes smart contract instructions across all nodes in the network. Every node runs EVM bytecode to keep the ledger's state synchronized. Because all computation is duplicated, EVM gas fees prevent infinity loops by charging "gas" for every operation. Layer 2 networks like Arbitrum run virtual machines (AVM/EVM) off-chain to reduce these execution costs drastically.
+            </div>
+          </details>
+
         </div>
       </section>
 
@@ -578,17 +661,38 @@
 
       <!-- CONCEPT 3: PUBLIC KEY VS PRIVATE KEY -->
       <section class="concept-section reveal" id="keys">
-        <div class="glass-card" style="padding: 40px 30px;">
+        <div class="glass-card spotlight-hover" style="padding: 40px 30px;">
           
           <div class="concept-title-bar">
             <i class="fa-solid fa-key text-gradient"></i>
             <h3>Public Key vs Private Key</h3>
           </div>
           
-          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+          <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1rem;">
             Web3 relies on asymmetric cryptography. You share your public address to receive assets, but use your private key to prove ownership and authorize actions.
           </p>
 
+          <!-- Key Takeaway -->
+          <div style="background: rgba(0, 242, 254, 0.03); border: 1px solid rgba(0, 242, 254, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--accent-cyan); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-star"></i> Key Takeaway
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Asymmetric cryptography separates public identification from private authorization. Your public address is visible to everyone, while your private key remains a strictly guarded secret to sign smart contract interactions.
+            </p>
+          </div>
+
+          <!-- Real World Example -->
+          <div style="background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--text-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-lightbulb"></i> Real-World Example
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Think of your public address as an email address (anyone can see it and send you emails). Think of your private key as the password to your inbox (only you can use it to log in and send outgoing emails).
+            </p>
+          </div>
+
+          <!-- Table -->
           <div class="table-wrapper">
             <table class="concept-table">
               <thead>
@@ -628,6 +732,27 @@
             </table>
           </div>
 
+          <!-- Pros and Cons -->
+          <div class="pros-cons-grid">
+            <div class="pros-box" style="background: rgba(0, 242, 254, 0.01); border-color: rgba(0, 242, 254, 0.15);">
+              <h5 style="color: var(--accent-cyan);"><i class="fa-solid fa-circle-check"></i> Security Advantages</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Cryptographic mathematical proof prevents impersonation or forgery.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Independence: No central database holding passwords that could get hacked.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Universal applicability: Same signature works on dApps across Web3.</li>
+              </ul>
+            </div>
+            <div class="cons-box" style="background: rgba(239, 68, 68, 0.01); border-color: rgba(239, 68, 68, 0.15);">
+              <h5 style="color: #ef4444;"><i class="fa-solid fa-circle-xmark"></i> Custody Disadvantages</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-minus" style="color:#ef4444;"></i> Zero recovery features: No customer support can reset your private key.</li>
+                <li><i class="fa-solid fa-minus" style="color:#ef4444;"></i> Seed phrase management requires careful offline physical backups.</li>
+                <li><i class="fa-solid fa-minus" style="color:#ef4444;"></i> Highly vulnerable to phishing attacks requesting wallet access.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Warning Banner -->
           <div class="cons-box" style="background: rgba(239, 68, 68, 0.03); border: 1px solid rgba(239, 68, 68, 0.2); margin-top: 24px;">
             <h5 style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> CRITICAL WARNING</h5>
             <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0;">
@@ -635,6 +760,17 @@
               Anyone who gets access to your private key can steal all of your assets. Keep it written down offline, and never enter it into unverified websites.
             </p>
           </div>
+
+          <!-- Expandable Deep Dive -->
+          <details style="background: rgba(4, 2, 10, 0.2); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px 20px; cursor: pointer; margin-top: 24px;">
+            <summary style="font-weight: 600; color: var(--accent-cyan); font-size: 0.95rem; outline: none; list-style-type: none; display: flex; justify-content: space-between; align-items: center;">
+              <span>Deep Dive: How Asymmetric Signatures Work</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+            </summary>
+            <div style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; cursor: default;">
+              In asymmetric cryptography, the private key is a randomly generated 256-bit number. The public key is mathematically derived from it using Elliptic Curve Cryptography (secp256k1 in Bitcoin and Ethereum). While generating a public key from a private key is fast, reversing it is mathematically impossible. A digital signature is generated by blending the message hash with the private key. Validators verify that the signature could only have been signed by the owner of the matching public key address.
+            </div>
+          </details>
 
         </div>
       </section>
@@ -652,17 +788,38 @@
 
       <!-- CONCEPT 4: BLOCKCHAIN VS TRADITIONAL DATABASE -->
       <section class="concept-section reveal" id="db-blockchain">
-        <div class="glass-card" style="padding: 40px 30px;">
+        <div class="glass-card spotlight-hover" style="padding: 40px 30px;">
           
           <div class="concept-title-bar">
             <i class="fa-solid fa-database text-gradient-purple"></i>
             <h3>Blockchain vs Database</h3>
           </div>
           
-          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+          <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1rem;">
             Both databases and blockchains record transactions and state information, but they solve entirely different problems regarding centralized authority, write permissions, and trust.
           </p>
 
+          <!-- Key Takeaway -->
+          <div style="background: rgba(139, 92, 246, 0.03); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--accent-purple); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-star"></i> Key Takeaway
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Traditional databases are centralized, fast, and permit CRUD (Create, Read, Update, Delete) edits by the system administrator. Blockchains are decentralized, append-only, immutable ledgers where state updates require cryptographic consensus.
+            </p>
+          </div>
+
+          <!-- Real World Example -->
+          <div style="background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--text-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-lightbulb"></i> Real-World Example
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              A traditional database is like a bank ledger managed by SQL tables (an engineer can manual-override or delete an entry). A blockchain is like Etherscan (where transaction logs are permanent, tamper-proof, and can never be deleted).
+            </p>
+          </div>
+
+          <!-- Table -->
           <div class="table-wrapper">
             <table class="concept-table">
               <thead>
@@ -707,21 +864,72 @@
             </table>
           </div>
 
+          <!-- Pros and Cons -->
+          <div class="pros-cons-grid">
+            <div class="pros-box" style="background: rgba(0, 242, 254, 0.01); border-color: rgba(0, 242, 254, 0.15);">
+              <h5 style="color: var(--accent-cyan);"><i class="fa-solid fa-circle-check"></i> Blockchain Advantages</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Immutable: Historical transaction records can never be maliciously modified.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Zero single points of failure; resilient against data corruption or shutdowns.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Publicly verifiable audit trail that establishes trustless cooperation.</li>
+              </ul>
+            </div>
+            <div class="cons-box" style="background: rgba(139, 92, 246, 0.01); border-color: rgba(139, 92, 246, 0.15);">
+              <h5 style="color: var(--accent-purple);"><i class="fa-solid fa-circle-xmark"></i> Database Advantages</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-purple);"></i> Speed: Milliseconds write speed compared to blockchain block times.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-purple);"></i> Storage efficiency: Can hold terabytes of media files at extremely low cost.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-purple);"></i> Simple recovery: Central authorities can reset access keys or edit errors.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Expandable Deep Dive -->
+          <details style="background: rgba(4, 2, 10, 0.2); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px 20px; cursor: pointer; margin-top: 24px;">
+            <summary style="font-weight: 600; color: var(--accent-purple); font-size: 0.95rem; outline: none; list-style-type: none; display: flex; justify-content: space-between; align-items: center;">
+              <span>Deep Dive: When to use a Blockchain vs Database</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+            </summary>
+            <div style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; cursor: default;">
+              You should use a traditional database if your project requires high-frequency data throughput, private editing capabilities, or handles heavy media files (like social media profiles or video hosting). You should use a blockchain if you need to coordinate value and agreements between parties who do not trust each other, require strict double-spend protection for digital assets, or want to deploy censorship-resistant smart contracts.
+            </div>
+          </details>
+
         </div>
       </section>
 
       <!-- CONCEPT 5: OPTIMISTIC ROLLUPS VS ZK-ROLLUPS -->
       <section class="concept-section reveal" id="optimistic-zk-rollups">
-        <div class="glass-card" style="padding: 40px 30px;">
+        <div class="glass-card spotlight-hover" style="padding: 40px 30px;">
           
           <div class="concept-title-bar">
             <i class="fa-solid fa-arrows-spin text-gradient"></i>
             <h3>Optimistic Rollups vs Zero-Knowledge (ZK) Rollups</h3>
           </div>
           
-          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+          <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1rem;">
             Optimistic and ZK-Rollups are the two dominant architectures for scaling Ethereum L2. While both bundle transactions off-chain, their validation proofs use completely different logic.
           </p>
+
+          <!-- Key Takeaway -->
+          <div style="background: rgba(0, 242, 254, 0.03); border: 1px solid rgba(0, 242, 254, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--accent-cyan); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-star"></i> Key Takeaway
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Optimistic rollups assume all transactions are valid by default and use fraud proofs during a 7-day challenge period to catch errors. ZK-rollups mathematically prove validity instantly by posting cryptographic validity proofs (SNARKs/STARKs) directly to L1.
+            </p>
+          </div>
+
+          <!-- Real World Example -->
+          <div style="background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <strong style="color: var(--text-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+              <i class="fa-solid fa-lightbulb"></i> Real-World Example
+            </strong>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Arbitrum is an Optimistic Rollup (fees are extremely low and L1 tooling is identical, but withdrawing back to Ethereum takes 7 days). zkSync Era is a ZK-Rollup (proof calculation requires high L2 math execution overhead, but withdrawing back to L1 takes under an hour).
+            </p>
+          </div>
 
           <!-- Glass Table -->
           <div class="table-wrapper">
@@ -787,6 +995,17 @@
               </ul>
             </div>
           </div>
+
+          <!-- Expandable Deep Dive -->
+          <details style="background: rgba(4, 2, 10, 0.2); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px 20px; cursor: pointer; margin-top: 24px;">
+            <summary style="font-weight: 600; color: var(--accent-cyan); font-size: 0.95rem; outline: none; list-style-type: none; display: flex; justify-content: space-between; align-items: center;">
+              <span>Deep Dive: Understanding Fraud Proof Challenges</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+            </summary>
+            <div style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; cursor: default;">
+              Optimistic rollups rely on an interactive dispute protocol. When a batch is posted, validators monitor its execution states. If a validator detects an incorrect transaction, they issue a challenge on Ethereum L1. The rollup virtual machine executes the disputed step inside a specialized referee contract on L1 (interactive fraud proof). If fraud is proven, the dishonest validator's stake is slashed and the ledger states are rolled back. This dispute window is why withdrawals require a 7-day delay.
+            </div>
+          </details>
 
         </div>
       </section>
@@ -1009,7 +1228,7 @@
 
         <div class="footer-socials">
           <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://github.com/hetutrivedi2005-cmyk" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
           <a href="#" class="social-icon" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
         </div>
@@ -1018,10 +1237,10 @@
       <div class="footer-bottom">
         <p>&copy; 2026 Arbitrum Explorer. All rights reserved.</p>
         <div class="footer-meta">
-          <span><i class="fa-solid fa-user"></i> Hetut</span>
+          <span><i class="fa-solid fa-user"></i> Het Trivedi</span>
           <span><i class="fa-solid fa-code-fork"></i> Batch: Web3-Frontends-2026</span>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <i class="fa-brands fa-github-alt"></i> Github Repository
+          <a href="https://github.com/hetutrivedi2005-cmyk" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="fa-brands fa-github-alt"></i> Github Profile
           </a>
         </div>
       </div>

@@ -211,47 +211,113 @@ async function triggerMine(blockNum) {
   const overlay = blockNum === 1 ? block1Overlay : block2Overlay;
   const nonceLive = blockNum === 1 ? block1NonceLive : block2NonceLive;
   const inputNonce = blockNum === 1 ? block1Nonce : block2Nonce;
+  const card = blockNum === 1 ? block1Card : block2Card;
+  const hashLabel = blockNum === 1 ? block1Hash : block2Hash;
+  
+  // Dashboard stats elements
+  const attemptsVal = document.getElementById(`block-${blockNum}-attempts-val`);
+  const timeTakenVal = document.getElementById(`block-${blockNum}-time-taken-val`);
+  const progressContainer = document.getElementById(`block-${blockNum}-progress-container`);
+  const progressBar = document.getElementById(`block-${blockNum}-progress-bar`);
+  
+  // Initialize Stats
+  if (attemptsVal) attemptsVal.textContent = '0';
+  if (timeTakenVal) timeTakenVal.textContent = '0.00s';
+  if (progressContainer) progressContainer.style.display = 'block';
+  if (progressBar) progressBar.style.width = '0%';
   
   overlay.classList.add('active');
+  hashLabel.classList.add('hash-noise-anim');
 
   const number = blockNum.toString();
   const data = blockNum === 1 ? block1Data.value : block2Data.value;
   const prevHash = blockNum === 1 ? document.getElementById('block-1-prev').value : block2Prev.value;
   
-  let currentNonce = 0;
-  const batchSize = 1200; // Chunk operations to prevent blocking main thread
+  const startTime = Date.now();
+  const duration = 1500; // 1.5 seconds simulation
+  let totalAttempts = 0;
 
-  async function searchNonce() {
-    for (let i = 0; i < batchSize; i++) {
-      const hash = await generateSHA256(number + currentNonce + data + prevHash);
-      
+  // Helper to generate mock hash during visual loop
+  function generateRandomHash() {
+    const chars = '0123456789abcdef';
+    let result = '';
+    for (let i = 0; i < 64; i++) {
+      result += chars[Math.floor(Math.random() * 16)];
+    }
+    return result;
+  }
+
+  function simulateMining() {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Update attempts & stopwatch
+    totalAttempts += Math.floor(Math.random() * 20) + 12; // speed up tick count
+    if (attemptsVal) attemptsVal.textContent = totalAttempts;
+    if (timeTakenVal) timeTakenVal.textContent = `${(elapsed / 1000).toFixed(2)}s`;
+    if (progressBar) progressBar.style.width = `${progress * 100}%`;
+    
+    // Render live visual noise hash
+    hashLabel.textContent = generateRandomHash();
+    
+    // Update overlay live nonce
+    nonceLive.textContent = totalAttempts;
+
+    if (elapsed < duration) {
+      requestAnimationFrame(simulateMining);
+    } else {
+      resolveRealMining();
+    }
+  }
+
+  async function resolveRealMining() {
+    // Solve the real math instantly
+    let finalNonce = 0;
+    while (true) {
+      const hash = await generateSHA256(number + finalNonce + data + prevHash);
       if (hash.startsWith('00')) {
-        // Success
-        inputNonce.value = currentNonce;
-        overlay.classList.remove('active');
+        // Success math locked in!
+        inputNonce.value = finalNonce;
         
-        // Trigger calculation updates
+        overlay.classList.remove('active');
+        hashLabel.classList.remove('hash-noise-anim');
+        if (progressContainer) progressContainer.style.display = 'none';
+
+        // Trigger updates
         if (blockNum === 1) {
           await calculateBlock1();
           triggerSuccessFlash(block1Card);
+          updateBlockTimestamp(1);
         } else {
           await calculateBlock2();
           triggerSuccessFlash(block2Card);
+          updateBlockTimestamp(2);
         }
         
         toggleInputs(false);
         isMining = false;
         return;
       }
-      currentNonce++;
+      finalNonce++;
     }
-
-    // Yield control back to browser to render live numbers counter
-    nonceLive.textContent = currentNonce;
-    requestAnimationFrame(searchNonce);
   }
 
-  requestAnimationFrame(searchNonce);
+  requestAnimationFrame(simulateMining);
+}
+
+function updateBlockTimestamp(blockNum) {
+  const timeText = document.getElementById(`block-${blockNum}-time-text`);
+  if (timeText) {
+    const now = new Date();
+    // Formatted as YYYY-MM-DD HH:MM:SS
+    const formatted = now.getFullYear() + '-' + 
+      String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+      String(now.getDate()).padStart(2, '0') + ' ' + 
+      String(now.getHours()).padStart(2, '0') + ':' + 
+      String(now.getMinutes()).padStart(2, '0') + ':' + 
+      String(now.getSeconds()).padStart(2, '0');
+    timeText.textContent = formatted;
+  }
 }
 
 /**

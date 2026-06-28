@@ -15,6 +15,16 @@
 </head>
 <body>
 
+  <!-- GLOBAL EFFECTS -->
+  <div class="scroll-progress-bar" id="scroll-progress"></div>
+  <div class="spotlight-follower" id="spotlight-follower"></div>
+
+  <!-- ANNOUNCEMENT BANNER -->
+  <div class="announcement-banner">
+    <span class="banner-badge">labs</span>
+    <span>Built for Arbitrum Builder Labs — Experience the future of Ethereum scaling.</span>
+  </div>
+
   <!-- BACKGROUND CANVAS & GLOWS -->
   <canvas id="bg-canvas"></canvas>
   <div class="grid-overlay"></div>
@@ -22,7 +32,7 @@
   <div class="blur-glow-2"></div>
 
   <!-- STICKY NAVBAR -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" style="top: 45px;">
     <div class="navbar-container">
       <a href="index.html" class="logo">
         <div class="logo-icon">
@@ -76,7 +86,7 @@
     <div class="simulator-container reveal delay-100">
       
       <!-- BLOCK 1 -->
-      <div class="glass-card simulator-block-card block-valid" id="block-1-card">
+      <div class="glass-card simulator-block-card block-valid spotlight-hover" id="block-1-card">
         <!-- Loading overlay during mining loops -->
         <div class="mining-overlay" id="block-1-overlay">
           <div style="width: 50px; height: 50px; border-radius:50%; border: 3px solid transparent; border-top-color: var(--accent-cyan); border-bottom-color: var(--accent-purple); animation: spin 1s linear infinite;"></div>
@@ -84,9 +94,25 @@
           <span class="mining-nonce-live" id="block-1-nonce-live">0</span>
         </div>
 
-        <div class="block-header">
+        <div class="block-header" style="margin-bottom: 12px;">
           <h3>Block #1</h3>
           <span class="block-badge badge-valid" id="block-1-badge">Valid</span>
+        </div>
+
+        <!-- Explorer Metadata Row -->
+        <div class="block-meta-row">
+          <div class="block-meta-item">
+            <span>Height</span>
+            <span id="block-1-height-text">#1</span>
+          </div>
+          <div class="block-meta-item">
+            <span>Timestamp</span>
+            <span id="block-1-time-text" style="font-size: 0.78rem;">2026-06-28 16:30:15</span>
+          </div>
+          <div class="block-meta-item">
+            <span>Difficulty</span>
+            <span style="color: var(--accent-cyan);">00 (2 Zeroes)</span>
+          </div>
         </div>
 
         <div class="sim-field">
@@ -114,6 +140,23 @@
           <div class="monospace-text hash-valid" id="block-1-hash" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 12px 16px;">--</div>
         </div>
 
+        <!-- Dashboard Stats Row -->
+        <div class="block-stats-row">
+          <div class="block-stat-box">
+            <span>Attempts</span>
+            <span id="block-1-attempts-val">0</span>
+          </div>
+          <div class="block-stat-box">
+            <span>Time Taken</span>
+            <span id="block-1-time-taken-val">0.00s</span>
+          </div>
+        </div>
+
+        <!-- Progress Bar Container -->
+        <div class="mining-progress-bar-container" id="block-1-progress-container" style="margin-bottom: 12px;">
+          <div class="mining-progress-bar" id="block-1-progress-bar"></div>
+        </div>
+
         <button class="btn btn-primary" id="block-1-mine-btn" style="width: 100%; margin-top: 10px;">
           <i class="fa-solid fa-hammer"></i> Mine Block 1
         </button>
@@ -128,7 +171,7 @@
       </div>
 
       <!-- BLOCK 2 -->
-      <div class="glass-card simulator-block-card block-valid" id="block-2-card">
+      <div class="glass-card simulator-block-card block-valid spotlight-hover" id="block-2-card">
         <!-- Loading overlay during mining loops -->
         <div class="mining-overlay" id="block-2-overlay">
           <div style="width: 50px; height: 50px; border-radius:50%; border: 3px solid transparent; border-top-color: var(--accent-cyan); border-bottom-color: var(--accent-purple); animation: spin 1s linear infinite;"></div>
@@ -136,9 +179,25 @@
           <span class="mining-nonce-live" id="block-2-nonce-live">0</span>
         </div>
 
-        <div class="block-header">
+        <div class="block-header" style="margin-bottom: 12px;">
           <h3>Block #2</h3>
           <span class="block-badge badge-valid" id="block-2-badge">Valid</span>
+        </div>
+
+        <!-- Explorer Metadata Row -->
+        <div class="block-meta-row">
+          <div class="block-meta-item">
+            <span>Height</span>
+            <span id="block-2-height-text">#2</span>
+          </div>
+          <div class="block-meta-item">
+            <span>Timestamp</span>
+            <span id="block-2-time-text" style="font-size: 0.78rem;">2026-06-28 16:30:20</span>
+          </div>
+          <div class="block-meta-item">
+            <span>Difficulty</span>
+            <span style="color: var(--accent-cyan);">00 (2 Zeroes)</span>
+          </div>
         </div>
 
         <div class="sim-field">
@@ -164,6 +223,23 @@
         <div class="sim-field">
           <label>Hash Output</label>
           <div class="monospace-text hash-valid" id="block-2-hash" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 12px 16px;">--</div>
+        </div>
+
+        <!-- Dashboard Stats Row -->
+        <div class="block-stats-row">
+          <div class="block-stat-box">
+            <span>Attempts</span>
+            <span id="block-2-attempts-val">0</span>
+          </div>
+          <div class="block-stat-box">
+            <span>Time Taken</span>
+            <span id="block-2-time-taken-val">0.00s</span>
+          </div>
+        </div>
+
+        <!-- Progress Bar Container -->
+        <div class="mining-progress-bar-container" id="block-2-progress-container" style="margin-bottom: 12px;">
+          <div class="mining-progress-bar" id="block-2-progress-bar"></div>
         </div>
 
         <button class="btn btn-primary" id="block-2-mine-btn" style="width: 100%; margin-top: 10px;">
@@ -243,7 +319,7 @@
 
         <div class="footer-socials">
           <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://github.com/hetutrivedi2005-cmyk" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
           <a href="#" class="social-icon" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
         </div>
@@ -252,10 +328,10 @@
       <div class="footer-bottom">
         <p>&copy; 2026 Arbitrum Explorer. All rights reserved.</p>
         <div class="footer-meta">
-          <span><i class="fa-solid fa-user"></i> Hetut</span>
+          <span><i class="fa-solid fa-user"></i> Het Trivedi</span>
           <span><i class="fa-solid fa-code-fork"></i> Batch: Web3-Frontends-2026</span>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <i class="fa-brands fa-github-alt"></i> Github Repository
+          <a href="https://github.com/hetutrivedi2005-cmyk" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="fa-brands fa-github-alt"></i> Github Profile
           </a>
         </div>
       </div>
