@@ -2,7 +2,7 @@
 
 A premium, production-quality, fully responsive multi-page Web3 startup showcase platform built using HTML, CSS, and Vanilla JavaScript only. The website highlights the scale, concepts, metrics, and security mechanisms of the Arbitrum Layer 2 scaling ecosystem.
 
-## 🚀 Key Features
+##  Key Features
 
 ### 1. Global Core Components
 - **Responsive Navigation**: Sticky glassmorphic navbar with active page detection. Automatically transforms into a slide-out hamburger navigation menu on mobile devices.
@@ -34,7 +34,7 @@ A premium, production-quality, fully responsive multi-page Web3 startup showcase
 
 ---
 
-## 📂 Folder Structure
+## Folder Structure
 
 ```
 Arbitrum Explorer/
@@ -58,7 +58,7 @@ Arbitrum Explorer/
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 - **Core Structure**: HTML5 Semantic markup
 - **Design System**: Vanilla CSS3 (Custom gradients, animations, CSS grid overlays, and Glassmorphism details)
 - **Programming Logic**: Vanilla ES6 JavaScript (Fetch API, Web Crypto API, and IntersectionObserver)
@@ -66,7 +66,7 @@ Arbitrum Explorer/
 
 ---
 
-## 💻 How to Run Locally
+##  How to Run Locally
 
 Since the project uses the **Fetch API** (for CoinGecko prices) and the **Web Crypto API** (for secure SHA-256 hashing), running the files directly from your file system (`file://` protocol) may block network requests due to browser CORS policies.
 
@@ -89,26 +89,26 @@ Then open `http://localhost:8000` in your browser.
 
 ---
 
-## 🔌 API Integrations Used
+##  API Integrations Used
 - **CoinGecko Simple Price API**:
   `https://api.coingecko.com/api/v3/simple/price`
   - Returns current valuations and 24-hour change rates.
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 1. **Wallet Connection Mockups**: Integrate mock wallet connection triggers ("Connect MetaMask") inside the navbar.
 2. **Gas Optimization Statistics**: Introduce live charts parsing average L2 saving parameters compared to Ethereum Mainnet gas spikes.
 3. **ZK-Rollup Sandbox Mode**: Build alternative tabs inside the block simulator showing zero-knowledge prover mechanics.
 
 ---
 
-## 👤 Author
-- **Name**: Hetut
+##  Author
+- **Name**: Het Trivedi
 - **Batch**: Web3-Frontends-2026
 - **GitHub Repository**: [https://github.com](https://github.com)
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the MIT License - see the LICENSE details for info.
