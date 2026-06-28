@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrum Explorer | Scale Ethereum with Layer 2</title>
+  <meta name="description" content="Explore Arbitrum Layer 2 scaling: experience lightning-fast speeds, ultra-low fees, and robust Ethereum security. Learn the concepts of Web3 scalability.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons (loaded asynchronously) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- BACKGROUND GRID & GLOW EFFECTS -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="blur-glow-1"></div>
+  <div class="blur-glow-2"></div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        Arbitrum Explorer
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="concepts.html" class="nav-link">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link">Block Simulator</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="concepts.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
+          <i class="fa-solid fa-graduation-cap"></i> Start Learning
+        </a>
+      </div>
+
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero-section section-padding" style="padding-top: 140px; padding-bottom: 40px;">
+    <div class="hero-container" style="display: flex; align-items: center; justify-content: space-between; gap: 60px; min-height: 80vh;">
+      
+      <div class="hero-content reveal-left" style="flex: 1; display: flex; flex-direction: column; align-items: flex-start;">
+        <div class="tagline" style="background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: 100px; padding: 6px 16px; font-size: 0.85rem; font-weight: 600; color: var(--accent-cyan); margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; background: var(--accent-cyan); border-radius: 50%; display: inline-block; box-shadow: var(--glow-cyan);"></span>
+          Arbitrum Layer 2 scaling
+        </div>
+        
+        <h1 style="font-size: 3.8rem; line-height: 1.15; margin-bottom: 20px; font-weight: 800;">
+          Scale Ethereum <br>
+          <span class="text-gradient">With Arbitrum</span>
+        </h1>
+        
+        <p style="color: var(--text-secondary); font-size: 1.15rem; margin-bottom: 36px; max-width: 540px;">
+          Ethereum is powerful, secure, and decentralized—but high traffic leads to slow transactions and sky-high gas fees. 
+          <strong>Arbitrum</strong> solves this as a Layer 2 Rollup, bundling thousands of transactions off-chain and securing them on Ethereum in a single block.
+        </p>
+        
+        <div class="hero-cta" style="display: flex; gap: 16px; width: 100%;">
+          <a href="concepts.html" class="btn btn-primary">
+            Explore Concepts <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="prices.html" class="btn btn-secondary">
+            Live Prices <i class="fa-solid fa-chart-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE ETHEREUM / ARBITRUM SVG ART -->
+      <div class="hero-illustration reveal-right" style="flex: 1; display: flex; justify-content: center; position: relative;">
+        <svg class="floating-illustration" viewBox="0 0 500 500" width="100%" height="450px" style="max-width: 480px; z-index: 1;">
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="ethGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4facfe" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.9" />
+            </linearGradient>
+            <linearGradient id="arbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#d946ef" stop-opacity="0.9" />
+            </linearGradient>
+            <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f2fe" />
+              <stop offset="100%" stop-color="#8b5cf6" />
+            </linearGradient>
+            <!-- Glowing Filters -->
+            <filter id="glow-cyan-svg" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="10" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <filter id="glow-purple-svg" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="12" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Core Network Wires (animated dash) -->
+          <g stroke="url(#lineGrad)" stroke-width="2" stroke-dasharray="8,6" fill="none">
+            <line x1="250" y1="150" x2="120" y2="290" />
+            <line x1="250" y1="150" x2="380" y2="290" />
+            <line x1="120" y1="290" x2="250" y2="400" />
+            <line x1="380" y1="290" x2="250" y2="400" />
+            <line x1="250" y1="150" x2="250" y2="400" stroke-width="1" opacity="0.4" />
+          </g>
+
+          <!-- Floating Ethereum Gem (Top Node) -->
+          <g class="float-animation-slow" style="animation: floating 8s ease-in-out infinite; transform-origin: 250px 150px;">
+            <!-- Outer Glow -->
+            <polygon points="250,70 295,145 250,180" fill="url(#ethGrad)" opacity="0.15" filter="url(#glow-cyan-svg)" />
+            <polygon points="250,70 205,145 250,180" fill="url(#ethGrad)" opacity="0.15" filter="url(#glow-cyan-svg)" />
+            
+            <!-- Ethereum Shape Top half -->
+            <polygon points="250,80 290,140 250,165" fill="url(#ethGrad)" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+            <polygon points="250,80 210,140 250,165" fill="url(#ethGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1" opacity="0.8" />
+            <!-- Ethereum Shape Bottom half -->
+            <polygon points="250,175 290,150 250,210" fill="url(#ethGrad)" stroke="rgba(255,255,255,0.3)" stroke-width="1" opacity="0.9" />
+            <polygon points="250,175 210,150 250,210" fill="url(#ethGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1" opacity="0.7" />
+            
+            <!-- Text Ethereum -->
+            <text x="250" y="55" fill="var(--text-primary)" font-family="var(--font-title)" font-weight="700" font-size="12" text-anchor="middle" letter-spacing="1">ETHEREUM L1</text>
+          </g>
+
+          <!-- Floating Arbitrum Portal (Bottom Node) -->
+          <g class="float-animation-normal" style="animation: floating 6s ease-in-out infinite alternate; transform-origin: 250px 400px;">
+            <!-- Outer glow ring -->
+            <circle cx="250" cy="400" r="45" fill="none" stroke="url(#arbGrad)" stroke-width="2" opacity="0.3" filter="url(#glow-purple-svg)" />
+            
+            <!-- Arbitrum nested shapes (spheres stacked styled as flat layers) -->
+            <circle cx="250" cy="380" r="14" fill="url(#arbGrad)" stroke="rgba(255,255,255,0.2)" />
+            <circle cx="230" cy="410" r="12" fill="url(#arbGrad)" stroke="rgba(255,255,255,0.2)" />
+            <circle cx="270" cy="410" r="12" fill="url(#arbGrad)" stroke="rgba(255,255,255,0.2)" />
+            
+            <text x="250" y="445" fill="var(--text-primary)" font-family="var(--font-title)" font-weight="700" font-size="12" text-anchor="middle" letter-spacing="1">ARBITRUM L2</text>
+          </g>
+
+          <!-- Transaction Bundling Blocks (Floating along lines) -->
+          <g class="float-animation-fast">
+            <!-- Block 1 (moving left L1->L2) -->
+            <rect x="175" y="210" width="16" height="16" rx="4" fill="#00f2fe" filter="url(#glow-cyan-svg)" opacity="0.8" style="animation: floating 4s ease-in-out infinite;" />
+            <!-- Block 2 (moving right L1->L2) -->
+            <rect x="305" y="210" width="16" height="16" rx="4" fill="#8b5cf6" filter="url(#glow-purple-svg)" opacity="0.8" style="animation: floating 5s ease-in-out infinite alternate;" />
+            <!-- Dynamic data wave -->
+            <circle cx="250" cy="275" r="8" fill="#d946ef" opacity="0.7" style="animation: floating 3s ease-in-out infinite;" />
+          </g>
+
+          <!-- Halo backlights -->
+          <circle cx="250" cy="250" r="120" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+          <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(255,255,255,0.015)" stroke-dasharray="5,15" stroke-width="1" />
+        </svg>
+        <div style="position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%); top: 100px; left: 100px; filter: blur(50px); z-index: 0; pointer-events: none;"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave-container">
+    <svg class="wave-divider" viewBox="0 0 1440 74" preserveAspectRatio="none">
+      <path d="M0,32L120,42.7C240,53,480,75,720,74.7C960,75,1200,53,1320,42.7L1440,32L1440,80L1320,80C1200,80,960,80,720,80C480,80,240,80,120,80L0,80Z"></path>
+    </svg>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section section-padding" id="about" style="position: relative;">
+    <div class="section-header reveal">
+      <h2 class="text-gradient">How Scaling Works</h2>
+      <p>Let's strip away the complex jargon. Here is a simple breakdown of the Web3 scaling puzzle and why Arbitrum matters.</p>
+    </div>
+
+    <div class="about-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px;">
+      
+      <div class="glass-card reveal delay-100" style="padding: 30px;">
+        <div class="about-icon" style="color: var(--accent-cyan); font-size: 2.2rem; margin-bottom: 20px;">
+          <i class="fa-solid fa-cubes"></i>
+        </div>
+        <h3 style="margin-bottom: 12px; font-size: 1.4rem;">What is Blockchain?</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          A decentralized, immutable database secured by cryptographic nodes. Everyone shares the same record, meaning no single center can corrupt or shut it down.
+        </p>
+      </div>
+
+      <div class="glass-card reveal delay-200" style="padding: 30px;">
+        <div class="about-icon" style="color: var(--accent-blue); font-size: 2.2rem; margin-bottom: 20px;">
+          <i class="fa-brands fa-ethereum"></i>
+        </div>
+        <h3 style="margin-bottom: 12px; font-size: 1.4rem;">What is Ethereum?</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          The global supercomputer of Web3. It runs code (Smart Contracts) so developers can build decentralized finance (DeFi), gaming, and digital identity platforms.
+        </p>
+      </div>
+
+      <div class="glass-card reveal delay-300" style="padding: 30px;">
+        <div class="about-icon" style="color: var(--accent-purple); font-size: 2.2rem; margin-bottom: 20px;">
+          <i class="fa-solid fa-arrows-split-up-and-left"></i>
+        </div>
+        <h3 style="margin-bottom: 12px; font-size: 1.4rem;">Why Layer 2?</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Ethereum Mainnet (L1) only processes 15 transactions per second. When demand spikes, users battle each other with high fees. L2 steps in as an express highway built on top.
+        </p>
+      </div>
+
+      <div class="glass-card reveal delay-400" style="padding: 30px;">
+        <div class="about-icon" style="color: var(--accent-pink); font-size: 2.2rem; margin-bottom: 20px;">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <h3 style="margin-bottom: 12px; font-size: 1.4rem;">What is Arbitrum?</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          A leading L2 scaling solution that executes transactions immediately off-chain, wraps them into compressed batches (Rollups), and settles them securely back on Ethereum.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features-section section-padding" id="features" style="position: relative; background: rgba(4, 2, 10, 0.3);">
+    <div class="section-header reveal">
+      <h2>Engineered for Performance</h2>
+      <p>Arbitrum provides developers and users the absolute best of both worlds: Web2 speed with Web3 security.</p>
+    </div>
+
+    <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 50px;">
+      
+      <!-- Feature Card 1 -->
+      <div class="glass-card feature-card reveal delay-100" style="padding: 40px 30px; border-radius: 20px; overflow: hidden; position: relative;">
+        <div class="glow-hover-effect"></div>
+        <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0, 242, 254, 0.1) 0%, rgba(79, 172, 254, 0.1) 100%); color: var(--accent-cyan); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 24px; border: 1px solid rgba(0, 242, 254, 0.2);">
+          <i class="fa-solid fa-gauge-high"></i>
+        </div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Fast Transactions</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+          Wait times are gone. Arbitrum processes transactions instantly, with sub-second feedback, rendering a seamless app experience.
+        </p>
+      </div>
+
+      <!-- Feature Card 2 -->
+      <div class="glass-card feature-card reveal delay-200" style="padding: 40px 30px; border-radius: 20px; overflow: hidden; position: relative;">
+        <div class="glow-hover-effect"></div>
+        <div class="feature-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(217, 70, 239, 0.1) 100%); color: var(--accent-purple); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 24px; border: 1px solid rgba(139, 92, 246, 0.2);">
+          <i class="fa-solid fa-circle-dollar-to-slot"></i>
+        </div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Lower Fees</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+          Save up to 95% on gas fees. By compressing transaction data before sending it to L1, the network divides fees among thousands of users.
+        </p>
+      </div>
+
+      <!-- Feature Card 3 -->
+      <div class="glass-card feature-card reveal delay-300" style="padding: 40px 30px; border-radius: 20px; overflow: hidden; position: relative;">
+        <div class="glow-hover-effect"></div>
+        <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0, 242, 254, 0.1) 0%, rgba(79, 172, 254, 0.1) 100%); color: var(--accent-blue); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 24px; border: 1px solid rgba(79, 172, 254, 0.2);">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Ethereum Security</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+          No compromises. Transactions are finalized on Ethereum Mainnet, leveraging the absolute security and decentralization of the base layer.
+        </p>
+      </div>
+
+      <!-- Feature Card 4 -->
+      <div class="glass-card feature-card reveal delay-400" style="padding: 40px 30px; border-radius: 20px; overflow: hidden; position: relative;">
+        <div class="glow-hover-effect"></div>
+        <div class="feature-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(217, 70, 239, 0.1) 100%); color: var(--accent-pink); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 24px; border: 1px solid rgba(217, 70, 239, 0.2);">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Scalable Network</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+          Built for mass adoption. Easily handle thousands of active concurrent decentralized applications (dApps) without hitting execution bottlenecks.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS TIMELINE -->
+  <section class="timeline-section section-padding" id="how-it-works">
+    <div class="section-header reveal">
+      <h2 class="text-gradient">The Transaction Lifecycle</h2>
+      <p>Trace how a transaction travels from your wallet, through the L2 rollup mechanism, to final settlement.</p>
+    </div>
+
+    <!-- Timeline Wrapper -->
+    <div class="timeline-wrapper reveal" style="position: relative; margin-top: 60px;">
+      
+      <!-- Timeline Central Line -->
+      <div class="timeline-line"></div>
+      
+      <div class="timeline-container">
+        
+        <!-- Step 1 -->
+        <div class="timeline-step">
+          <div class="timeline-dot dot-cyan">
+            <span class="timeline-number">1</span>
+          </div>
+          <div class="glass-card timeline-content">
+            <span class="step-tag" style="color: var(--accent-cyan);">Wallet</span>
+            <h4>Ethereum Mainnet Request</h4>
+            <p>You trigger a swap, transfer, or mint from your wallet. Instead of submitting directly to expensive L1 nodes, you request routing through Arbitrum.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="timeline-step">
+          <div class="timeline-dot dot-cyan">
+            <span class="timeline-number">2</span>
+          </div>
+          <div class="glass-card timeline-content">
+            <span class="step-tag" style="color: var(--accent-cyan);">Aggregator</span>
+            <h4>L2 Transaction Queue</h4>
+            <p>The transaction hits the Arbitrum Sequencer. It processes and sequences your transaction instantly in milliseconds, providing an immediate receipt.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="timeline-step">
+          <div class="timeline-dot dot-purple">
+            <span class="timeline-number">3</span>
+          </div>
+          <div class="glass-card timeline-content">
+            <span class="step-tag" style="color: var(--accent-purple);">Rollup</span>
+            <h4>Optimistic Rollup Bundle</h4>
+            <p>Multiple off-chain transactions are compressed and bundled together. This batching mechanism drastically cuts down storage data costs.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="timeline-step">
+          <div class="timeline-dot dot-purple">
+            <span class="timeline-number">4</span>
+          </div>
+          <div class="glass-card timeline-content">
+            <span class="step-tag" style="color: var(--accent-purple);">Execution</span>
+            <h4>Arbitrum Virtual Machine</h4>
+            <p>The batch is processed inside the AVM, compiling gas reports and verifying smart contracts instructions matching EVM specs.</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="timeline-step">
+          <div class="timeline-dot dot-mixed">
+            <span class="timeline-number">5</span>
+          </div>
+          <div class="glass-card timeline-content">
+            <span class="step-tag" style="background: var(--gradient-mixed); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Settle</span>
+            <h4>L1 Settlement</h4>
+            <p>The compressed rollup data is submitted and anchored onto Ethereum L1. Ethereum verifies validity, finalizing your transaction safely.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE ARBITRUM (COMPARISON CARDS) -->
+  <section class="comparison-section section-padding" id="comparison" style="background: rgba(4, 2, 10, 0.3);">
+    <div class="section-header reveal">
+      <h2>Ethereum vs Arbitrum</h2>
+      <p>See why shifting smart contracts and operations to Arbitrum Layer 2 is the standard for Web3 applications.</p>
+    </div>
+
+    <div class="comparison-grid" style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 50px;">
+      
+      <!-- Card L1 -->
+      <div class="glass-card comp-card reveal-left" style="flex: 1; min-width: 300px; max-width: 500px; padding: 40px 30px; border-top: 4px solid var(--text-muted);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+          <h3 style="font-size: 1.6rem; font-weight: 700;">Ethereum Mainnet</h3>
+          <span style="color: var(--text-secondary); background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 100px; font-size: 0.8rem; font-weight: 600;">Layer 1</span>
+        </div>
+        
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 20px;">
+          <li style="display: flex; align-items: center; gap: 16px;">
+            <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem;">High Fees</strong>
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">Gas fees spike from $5 to $100+ during heavy traffic.</span>
+            </div>
+          </li>
+          <li style="display: flex; align-items: center; gap: 16px;">
+            <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem;">Slow Processing</strong>
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">Handles only ~15 transactions per second.</span>
+            </div>
+          </li>
+          <li style="display: flex; align-items: center; gap: 16px;">
+            <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem;">Congested Network</strong>
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">One successful NFT mint can slow down operations for all users.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card L2 -->
+      <div class="glass-card comp-card comp-card-active reveal-right" style="flex: 1; min-width: 300px; max-width: 500px; padding: 40px 30px; border-top: 4px solid var(--accent-cyan); box-shadow: 0 0 30px rgba(0, 242, 254, 0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+          <h3 style="font-size: 1.6rem; font-weight: 700;" class="text-gradient">Arbitrum L2</h3>
+          <span style="color: var(--accent-cyan); background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); padding: 4px 12px; border-radius: 100px; font-size: 0.8rem; font-weight: 600;">Recommended</span>
+        </div>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 20px;">
+          <li style="display: flex; align-items: center; gap: 16px;">
+            <div style="background: rgba(16, 185, 129, 0.15); color: #10b981; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem; color: #10b981;">Low Fees</strong>
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">Transactions consistently cost fractions of a cent ($0.01 - $0.10).</span>
+            </div>
+          </li>
+          <li style="display: flex; align-items: center; gap: 16px;">
+            <div style="background: rgba(16, 185, 129, 0.15); color: #10b981; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem; color: #10b981;">Instant Speed</strong>
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">Processes up to 40,000+ transactions per second in peak loads.</span>
+            </div>
+          </li>
+          <li style="display: flex; align-items: center; gap: 16px;">
+            <div style="background: rgba(16, 185, 129, 0.15); color: #10b981; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem; color: #10b981;">Unlimited Scalability</strong>
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">Batched rollups reduce congestion, allowing L1-secured apps to scale.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATISTICS SECTION -->
+  <section class="stats-section section-padding" id="stats">
+    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;">
+      
+      <div class="stat-item reveal">
+        <h3 class="counter text-gradient" data-target="450" data-suffix="M+">0</h3>
+        <p style="color: var(--text-secondary); font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;">Transactions Processed</p>
+      </div>
+
+      <div class="stat-item reveal delay-100">
+        <h3 class="counter text-gradient-purple" data-target="15" data-suffix="K+">0</h3>
+        <p style="color: var(--text-secondary); font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;">Developers Building</p>
+      </div>
+
+      <div class="stat-item reveal delay-200">
+        <h3 class="counter text-gradient" data-target="3.2" data-suffix="B+" data-prefix="$" data-decimal="true">0</h3>
+        <p style="color: var(--text-secondary); font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;">Total Value Locked</p>
+      </div>
+
+      <div class="stat-item reveal delay-300">
+        <h3 class="counter text-gradient-purple" data-target="0.01" data-prefix="$" data-decimal="true">0</h3>
+        <p style="color: var(--text-secondary); font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;">Avg. Transaction Cost</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section section-padding">
+    <div class="glass-card reveal" style="padding: 60px 40px; text-align: center; border-radius: 24px; background: radial-gradient(circle at top right, rgba(0, 242, 254, 0.08), rgba(139, 92, 246, 0.05)); border: 1px solid rgba(255, 255, 255, 0.1);">
+      <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Ready to Explore Web3?</h2>
+      <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 36px auto; font-size: 1.1rem;">
+        Take a deep dive into comparing core blockchain networks, cryptographic key paradigms, smart contract states, and Web2 database comparisons.
+      </p>
+      <a href="concepts.html" class="btn btn-primary" style="padding: 14px 36px; font-size: 1.1rem;">
+        Start Learning <i class="fa-solid fa-graduation-cap"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            Arbitrum Explorer
+          </a>
+          <p>Analyzing, exploring, and scaling Ethereum through Optimistic Rollup architectures. Your guide to decentralized scaling layers.</p>
+        </div>
+
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="social-icon" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Arbitrum Explorer. All rights reserved.</p>
+        <div class="footer-meta">
+          <span><i class="fa-solid fa-user"></i> Hetut</span>
+          <span><i class="fa-solid fa-code-fork"></i> Batch: Web3-Frontends-2026</span>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="fa-brands fa-github-alt"></i> Github Repository
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

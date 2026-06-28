@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrum Explorer | Live Cryptocurrency Prices</title>
+  <meta name="description" content="Track real-time cryptocurrency values powered by CoinGecko API. View interactive grids for Bitcoin, Ethereum, Arbitrum, Solana, and Polygon.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- BACKGROUND CANVAS & GLOWS -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="blur-glow-1"></div>
+  <div class="blur-glow-2"></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        Arbitrum Explorer
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="concepts.html" class="nav-link">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link">Block Simulator</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
+          <i class="fa-solid fa-home"></i> Back Home
+        </a>
+      </div>
+
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENT CONTAINER -->
+  <main class="section-padding" style="padding-top: 140px;">
+    
+    <!-- Page Header -->
+    <div class="section-header reveal" style="margin-bottom: 40px;">
+      <h1 style="font-size: 3.2rem; margin-bottom: 12px;">Live Cryptocurrency <span class="text-gradient">Prices</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary);">Track real-time cryptocurrency prices powered by CoinGecko API.</p>
+    </div>
+
+    <!-- Statistics Panel -->
+    <div class="prices-stats reveal delay-100">
+      
+      <div class="glass-card price-stat-card">
+        <span class="stat-label">Total Coins</span>
+        <span class="stat-value text-gradient" id="stat-total">5</span>
+      </div>
+      
+      <div class="glass-card price-stat-card">
+        <span class="stat-label">API Status</span>
+        <span class="stat-value" id="stat-status" style="color: var(--accent-cyan);">Loading...</span>
+      </div>
+      
+      <div class="glass-card price-stat-card">
+        <span class="stat-label">Last Refresh</span>
+        <span class="stat-value" id="stat-refresh">Never</span>
+      </div>
+      
+      <div class="glass-card price-stat-card">
+        <span class="stat-label">Current Time</span>
+        <span class="stat-value" id="stat-clock">--:--:-- UTC</span>
+      </div>
+
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="search-filter-bar reveal delay-200">
+      <div class="search-box-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search-input" placeholder="Search coin by name or symbol (e.g. BTC, Solana)..." id="search-input" aria-label="Search coins">
+      </div>
+      
+      <button class="btn btn-primary" id="refresh-btn" aria-label="Refresh prices">
+        <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i> Refresh Prices
+      </button>
+    </div>
+
+    <!-- Error state layout -->
+    <div class="glass-card reveal" id="error-card" style="display: none; padding: 50px 30px; text-align: center; border-color: rgba(239, 68, 68, 0.25); max-width: 600px; margin: 0 auto 40px auto; background: rgba(239, 68, 68, 0.02);">
+      <div style="font-size: 3rem; color: #ef4444; margin-bottom: 20px;">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px; font-weight: 700;">API Rate Limit Reached</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+        CoinGecko API request failed. This typically happens when too many requests are sent from the same network (rate limits). Please wait 30 seconds and try again.
+      </p>
+      <button class="btn btn-secondary" id="retry-btn">
+        <i class="fa-solid fa-arrows-rotate"></i> Retry Connection
+      </button>
+    </div>
+
+    <!-- Dynamic Cryptocurrencies Cards Grid -->
+    <div class="prices-grid reveal delay-300" id="prices-grid">
+      
+      <!-- Card Skeleton 1 -->
+      <div class="glass-card skeleton-card">
+        <div class="price-card-header">
+          <div class="skeleton-logo skeleton-pulse-element"></div>
+          <div class="skeleton-title skeleton-pulse-element"></div>
+        </div>
+        <div class="price-body">
+          <div class="skeleton-price skeleton-pulse-element"></div>
+          <div class="skeleton-change skeleton-pulse-element"></div>
+        </div>
+        <div class="price-card-footer">
+          <div class="skeleton-title skeleton-pulse-element" style="width: 50px;"></div>
+          <div class="skeleton-title skeleton-pulse-element" style="width: 40px;"></div>
+        </div>
+      </div>
+
+      <!-- Card Skeleton 2 -->
+      <div class="glass-card skeleton-card">
+        <div class="price-card-header">
+          <div class="skeleton-logo skeleton-pulse-element"></div>
+          <div class="skeleton-title skeleton-pulse-element"></div>
+        </div>
+        <div class="price-body">
+          <div class="skeleton-price skeleton-pulse-element"></div>
+          <div class="skeleton-change skeleton-pulse-element"></div>
+        </div>
+        <div class="price-card-footer">
+          <div class="skeleton-title skeleton-pulse-element" style="width: 50px;"></div>
+          <div class="skeleton-title skeleton-pulse-element" style="width: 40px;"></div>
+        </div>
+      </div>
+
+      <!-- Card Skeleton 3 -->
+      <div class="glass-card skeleton-card">
+        <div class="price-card-header">
+          <div class="skeleton-logo skeleton-pulse-element"></div>
+          <div class="skeleton-title skeleton-pulse-element"></div>
+        </div>
+        <div class="price-body">
+          <div class="skeleton-price skeleton-pulse-element"></div>
+          <div class="skeleton-change skeleton-pulse-element"></div>
+        </div>
+        <div class="price-card-footer">
+          <div class="skeleton-title skeleton-pulse-element" style="width: 50px;"></div>
+          <div class="skeleton-title skeleton-pulse-element" style="width: 40px;"></div>
+        </div>
+      </div>
+
+      <!-- Card Skeleton 4 -->
+      <div class="glass-card skeleton-card">
+        <div class="price-card-header">
+          <div class="skeleton-logo skeleton-pulse-element"></div>
+          <div class="skeleton-title skeleton-pulse-element"></div>
+        </div>
+        <div class="price-body">
+          <div class="skeleton-price skeleton-pulse-element"></div>
+          <div class="skeleton-change skeleton-pulse-element"></div>
+        </div>
+        <div class="price-card-footer">
+          <div class="skeleton-title skeleton-pulse-element" style="width: 50px;"></div>
+          <div class="skeleton-title skeleton-pulse-element" style="width: 40px;"></div>
+        </div>
+      </div>
+
+      <!-- Card Skeleton 5 -->
+      <div class="glass-card skeleton-card">
+        <div class="price-card-header">
+          <div class="skeleton-logo skeleton-pulse-element"></div>
+          <div class="skeleton-title skeleton-pulse-element"></div>
+        </div>
+        <div class="price-body">
+          <div class="skeleton-price skeleton-pulse-element"></div>
+          <div class="skeleton-change skeleton-pulse-element"></div>
+        </div>
+        <div class="price-card-footer">
+          <div class="skeleton-title skeleton-pulse-element" style="width: 50px;"></div>
+          <div class="skeleton-title skeleton-pulse-element" style="width: 40px;"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- L2 GAS SAVINGS ESTIMATOR -->
+    <div class="glass-card reveal delay-300" style="margin-top: 60px; padding: 40px 30px;" id="gas-estimator-section">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+        <i class="fa-solid fa-calculator text-gradient" style="font-size: 2rem;"></i>
+        <h3>Interactive L2 Gas Savings Calculator</h3>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 30px;">
+        Estimate how much gas fees you save by shifting operations from Ethereum Mainnet (L1) to Arbitrum Layer 2 (L2) Rollups.
+      </p>
+
+      <div class="estimator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+        
+        <!-- Calculator Inputs -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          
+          <div class="sim-field" style="margin-bottom: 0;">
+            <label for="txn-type">Select Transaction Operation</label>
+            <select id="txn-type" style="width: 100%; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-primary); padding: 12px 16px; font-size: 0.95rem; font-family: var(--font-body); outline: none;">
+              <option value="transfer">Simple Token Transfer (Send ETH)</option>
+              <option value="swap" selected>Uniswap Token Swap (ERC-20 Trade)</option>
+              <option value="mint">NFT Mint (Smart Contract Execution)</option>
+            </select>
+          </div>
+
+          <div class="sim-field" style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <label for="txn-slider" style="margin-bottom: 0;">Transactions Per Month</label>
+              <span id="slider-val" class="monospace-text" style="color: var(--accent-cyan); font-weight: 700; font-size: 1.1rem;">50 Txns</span>
+            </div>
+            <input type="range" id="txn-slider" min="1" max="250" value="50" style="width: 100%; accent-color: var(--accent-cyan); cursor: pointer;">
+          </div>
+
+        </div>
+
+        <!-- Calculator Outputs -->
+        <div class="glass-card" style="padding: 24px; background: rgba(255, 255, 255, 0.01); border-color: rgba(255, 255, 255, 0.04); display: flex; flex-direction: column; gap: 20px;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 12px;">
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">Ethereum Mainnet Cost</span>
+            <span class="monospace-text" id="l1-cost" style="color: #ef4444; font-weight: 700; font-size: 1.15rem;">$750.00</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 12px;">
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">Arbitrum Rollup Cost</span>
+            <span class="monospace-text" id="l2-cost" style="color: var(--accent-cyan); font-weight: 700; font-size: 1.15rem;">$15.00</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 4px;">
+            <div>
+              <span style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Total Monthly Savings</span>
+              <span style="color: #10b981; font-size: 0.8rem; font-weight: 500;">~98.0% Gas Savings!</span>
+            </div>
+            <span class="monospace-text text-gradient" id="gas-savings" style="font-size: 1.9rem; font-weight: 800; text-shadow: 0 0 15px rgba(0, 242, 254, 0.25);">$735.00</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Floating Background Decorative Elements -->
+    <div style="position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%); top: 40%; left: 30%; filter: blur(50px); z-index: -1; pointer-events: none;"></div>
+    <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, transparent 70%); top: 60%; right: 20%; filter: blur(60px); z-index: -1; pointer-events: none;"></div>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            Arbitrum Explorer
+          </a>
+          <p>Analyzing, exploring, and scaling Ethereum through Optimistic Rollup architectures. Your guide to decentralized scaling layers.</p>
+        </div>
+
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="social-icon" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Arbitrum Explorer. All rights reserved.</p>
+        <div class="footer-meta">
+          <span><i class="fa-solid fa-user"></i> Hetut</span>
+          <span><i class="fa-solid fa-code-fork"></i> Batch: Web3-Frontends-2026</span>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="fa-brands fa-github-alt"></i> Github Repository
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/prices.js"></script>
+</body>
+</html>

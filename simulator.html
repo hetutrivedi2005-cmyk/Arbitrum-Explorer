@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrum Explorer | Blockchain Mining Simulator</title>
+  <meta name="description" content="Simulate real Proof of Work blockchain mining in your browser. Edit nonces, customize block data payloads, and test cryptographic integrity.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- BACKGROUND CANVAS & GLOWS -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="blur-glow-1"></div>
+  <div class="blur-glow-2"></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        Arbitrum Explorer
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="concepts.html" class="nav-link">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link">Block Simulator</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
+          <i class="fa-solid fa-home"></i> Back Home
+        </a>
+      </div>
+
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENT CONTAINER -->
+  <main class="section-padding" style="padding-top: 140px;">
+    
+    <!-- Page Header -->
+    <div class="section-header reveal" style="margin-bottom: 20px;">
+      <h1 style="font-size: 3.2rem; margin-bottom: 12px;">Blockchain Mining <span class="text-gradient">Simulator</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary);">Understand hashing, proof of work, and blockchain immutability by mining blocks.</p>
+    </div>
+
+
+
+    <!-- Dynamic State Recommendation Helper Panel -->
+    <div class="glass-card reveal delay-100" id="simulator-recommendation-panel" style="padding: 20px 24px; margin-bottom: 30px; border-left: 4px solid var(--accent-cyan); display: flex; align-items: center; gap: 16px; background: rgba(0, 242, 254, 0.01); border-color: rgba(0, 242, 254, 0.15);">
+      <div style="font-size: 1.5rem; color: var(--accent-cyan);"><i class="fa-solid fa-circle-info" id="recommendation-icon"></i></div>
+      <div>
+        <strong style="display: block; font-size: 0.95rem; margin-bottom: 2px;">Blockchain Status & Recommended Action</strong>
+        <span style="color: var(--text-secondary); font-size: 0.9rem;" id="recommendation-text">👉 Initializing blockchain nodes...</span>
+      </div>
+    </div>
+
+    <!-- Simulator Connected Boxes Container -->
+    <div class="simulator-container reveal delay-100">
+      
+      <!-- BLOCK 1 -->
+      <div class="glass-card simulator-block-card block-valid" id="block-1-card">
+        <!-- Loading overlay during mining loops -->
+        <div class="mining-overlay" id="block-1-overlay">
+          <div style="width: 50px; height: 50px; border-radius:50%; border: 3px solid transparent; border-top-color: var(--accent-cyan); border-bottom-color: var(--accent-purple); animation: spin 1s linear infinite;"></div>
+          <span class="mining-progress-text">Executing Nonce Search...</span>
+          <span class="mining-nonce-live" id="block-1-nonce-live">0</span>
+        </div>
+
+        <div class="block-header">
+          <h3>Block #1</h3>
+          <span class="block-badge badge-valid" id="block-1-badge">Valid</span>
+        </div>
+
+        <div class="sim-field">
+          <label for="block-1-number">Block Number</label>
+          <input type="text" id="block-1-number" value="1" readonly>
+        </div>
+
+        <div class="sim-field">
+          <label for="block-1-nonce">Nonce</label>
+          <input type="number" id="block-1-nonce" value="812" autocomplete="off">
+        </div>
+
+        <div class="sim-field">
+          <label for="block-1-data">Block Data</label>
+          <textarea id="block-1-data" rows="4" placeholder="Enter transactions or message data..." autocomplete="off">Genesis Block Data: Welcome to Arbitrum Explorer</textarea>
+        </div>
+
+        <div class="sim-field">
+          <label for="block-1-prev">Previous Hash</label>
+          <input type="text" class="monospace-text" id="block-1-prev" value="0000000000000000000000000000000000000000000000000000000000000000" readonly>
+        </div>
+
+        <div class="sim-field">
+          <label>Hash Output</label>
+          <div class="monospace-text hash-valid" id="block-1-hash" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 12px 16px;">--</div>
+        </div>
+
+        <button class="btn btn-primary" id="block-1-mine-btn" style="width: 100%; margin-top: 10px;">
+          <i class="fa-solid fa-hammer"></i> Mine Block 1
+        </button>
+      </div>
+
+      <!-- VISUAL CONNECTOR SVG -->
+      <div class="block-connector">
+        <svg class="connector-svg" viewBox="0 0 100 50" preserveAspectRatio="none">
+          <path class="connector-path path-horizontal connector-valid" id="connector-line-h" d="M 0,25 Q 50,25 100,25" />
+          <path class="connector-path path-vertical connector-valid" id="connector-line-v" d="M 50,0 Q 50,25 50,50" />
+        </svg>
+      </div>
+
+      <!-- BLOCK 2 -->
+      <div class="glass-card simulator-block-card block-valid" id="block-2-card">
+        <!-- Loading overlay during mining loops -->
+        <div class="mining-overlay" id="block-2-overlay">
+          <div style="width: 50px; height: 50px; border-radius:50%; border: 3px solid transparent; border-top-color: var(--accent-cyan); border-bottom-color: var(--accent-purple); animation: spin 1s linear infinite;"></div>
+          <span class="mining-progress-text">Executing Nonce Search...</span>
+          <span class="mining-nonce-live" id="block-2-nonce-live">0</span>
+        </div>
+
+        <div class="block-header">
+          <h3>Block #2</h3>
+          <span class="block-badge badge-valid" id="block-2-badge">Valid</span>
+        </div>
+
+        <div class="sim-field">
+          <label for="block-2-number">Block Number</label>
+          <input type="text" id="block-2-number" value="2" readonly>
+        </div>
+
+        <div class="sim-field">
+          <label for="block-2-nonce">Nonce</label>
+          <input type="number" id="block-2-nonce" value="184" autocomplete="off">
+        </div>
+
+        <div class="sim-field">
+          <label for="block-2-data">Block Data</label>
+          <textarea id="block-2-data" rows="4" placeholder="Enter transactions or message data..." autocomplete="off">Arbitrum Rollup Bundle: L2 Batch #40102 settled on Ethereum L1.</textarea>
+        </div>
+
+        <div class="sim-field">
+          <label for="block-2-prev">Previous Hash</label>
+          <input type="text" class="monospace-text" id="block-2-prev" value="" readonly>
+        </div>
+
+        <div class="sim-field">
+          <label>Hash Output</label>
+          <div class="monospace-text hash-valid" id="block-2-hash" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 12px 16px;">--</div>
+        </div>
+
+        <button class="btn btn-primary" id="block-2-mine-btn" style="width: 100%; margin-top: 10px;">
+          <i class="fa-solid fa-hammer"></i> Mine Block 2
+        </button>
+      </div>
+
+    </div>
+
+    <!-- EDUCATIONAL SECTION -->
+    <section style="margin-top: 100px;">
+      <div class="section-header reveal">
+        <h2 class="text-gradient">How Proof of Work Works</h2>
+        <p>A simple guide explaining the cryptographic components of the mining simulation sandbox above.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 50px;">
+        
+        <div class="glass-card reveal delay-100" style="padding: 30px;">
+          <div style="color: var(--accent-cyan); font-size: 2rem; margin-bottom: 20px;">
+            <i class="fa-solid fa-fingerprint"></i>
+          </div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 12px;">What is a Hash?</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+            A cryptographic mathematical algorithm (like SHA-256) that maps any input data into a fixed-length string of 64 hexadecimal characters. It is a one-way function—impossible to reverse.
+          </p>
+        </div>
+
+        <div class="glass-card reveal delay-200" style="padding: 30px;">
+          <div style="color: var(--accent-blue); font-size: 2rem; margin-bottom: 20px;">
+            <i class="fa-solid fa-hashtag"></i>
+          </div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 12px;">What is a Nonce?</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+            Short for "Number used once". Since changing the block data itself is not allowed, miners change this arbitrary number field to yield completely different cryptographic hash outputs.
+          </p>
+        </div>
+
+        <div class="glass-card reveal delay-300" style="padding: 30px;">
+          <div style="color: var(--accent-purple); font-size: 2rem; margin-bottom: 20px;">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Proof of Work</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+            The process of searching for a nonce value that yields a hash beginning with a specific number of zeros. Finding a valid hash is difficult, but verifying it is instantaneous.
+          </p>
+        </div>
+
+        <div class="glass-card reveal delay-400" style="padding: 30px;">
+          <div style="color: var(--accent-pink); font-size: 2rem; margin-bottom: 20px;">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Immutability</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+            Because each block references the previous block's hash, modifying data in any single block breaks all subsequent link connections in the chain, preventing malicious history changes.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            Arbitrum Explorer
+          </a>
+          <p>Analyzing, exploring, and scaling Ethereum through Optimistic Rollup architectures. Your guide to decentralized scaling layers.</p>
+        </div>
+
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="social-icon" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Arbitrum Explorer. All rights reserved.</p>
+        <div class="footer-meta">
+          <span><i class="fa-solid fa-user"></i> Hetut</span>
+          <span><i class="fa-solid fa-code-fork"></i> Batch: Web3-Frontends-2026</span>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="fa-brands fa-github-alt"></i> Github Repository
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/simulator.js"></script>
+</body>
+</html>

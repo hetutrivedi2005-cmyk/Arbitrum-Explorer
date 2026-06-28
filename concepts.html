@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrum Explorer | Learn Web3 Concepts</title>
+  <meta name="description" content="Deep dive into core Web3 foundations. Compare Web2 vs Web3, Bitcoin vs Ethereum, Public vs Private Keys, and Blockchains vs Databases.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Concept Specific Inline Styling to keep code organized */
+    .concepts-container {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      margin-top: 40px;
+    }
+
+    .concept-section {
+      position: relative;
+    }
+
+    .concept-title-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .concept-title-bar i {
+      font-size: 2rem;
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 24px;
+      background: rgba(4, 2, 10, 0.2);
+    }
+
+    .concept-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      min-width: 600px;
+    }
+
+    .concept-table th, .concept-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .concept-table th {
+      background: rgba(255, 255, 255, 0.02);
+      font-family: var(--font-title);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .concept-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .concept-table td strong {
+      color: var(--accent-cyan);
+    }
+
+    .pros-cons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .pros-box, .cons-box {
+      padding: 24px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .pros-box h5, .cons-box h5 {
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pros-box h5 { color: #10b981; }
+    .cons-box h5 { color: #ef4444; }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .bullet-list li i {
+      margin-top: 4px;
+      font-size: 0.8rem;
+    }
+
+    /* Did You Know? Styles */
+    .dyk-card {
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.07), rgba(0, 242, 254, 0.04));
+      border: 1px dashed rgba(0, 242, 254, 0.25);
+      border-radius: 16px;
+      padding: 24px 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 40px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dyk-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dyk-icon {
+      font-size: 2.2rem;
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+      animation: bulb-pulse 2s infinite alternate;
+      z-index: 1;
+    }
+
+    .dyk-content {
+      z-index: 1;
+    }
+
+    .dyk-content h4 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .dyk-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    @keyframes bulb-pulse {
+      0% { text-shadow: 0 0 5px rgba(0,242,254,0.1); transform: scale(1); }
+      100% { text-shadow: 0 0 15px rgba(0,242,254,0.5); transform: scale(1.05); }
+    }
+
+    @media (max-width: 768px) {
+      .pros-cons-grid {
+        grid-template-columns: 1fr;
+      }
+      .dyk-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+      }
+    }
+
+    /* Wallet Sandbox styles */
+    .wallet-sandbox {
+      background: radial-gradient(circle at bottom right, rgba(0, 242, 254, 0.04), rgba(139, 92, 246, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 30px;
+    }
+
+    .wallet-connected-panel {
+      display: none;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .wallet-meta-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .wallet-meta-item {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 16px;
+      border-radius: 10px;
+    }
+
+    .wallet-meta-item label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .wallet-meta-item span {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .signature-sandbox-area {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .signature-output-box {
+      display: none;
+      background: rgba(16, 185, 129, 0.04);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 16px;
+      animation: slideUp 0.4s ease;
+    }
+
+    /* Quiz styles */
+    .quiz-card {
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.04), rgba(0, 242, 254, 0.04));
+      padding: 40px 30px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .quiz-question {
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-bottom: 20px;
+    }
+
+    .quiz-question h4 {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-option {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(0, 242, 254, 0.25);
+    }
+
+    .quiz-option.selected {
+      background: rgba(0, 242, 254, 0.05);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+    }
+
+    .quiz-option.correct {
+      background: rgba(16, 185, 129, 0.1) !important;
+      border-color: #10b981 !important;
+    }
+
+    .quiz-option.incorrect {
+      background: rgba(239, 68, 68, 0.1) !important;
+      border-color: #ef4444 !important;
+    }
+
+    .option-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      display: inline-block;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option.selected .option-dot {
+      border-color: var(--accent-cyan);
+      background: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .quiz-option.correct .option-dot {
+      border-color: #10b981;
+      background: #10b981;
+    }
+
+    .quiz-option.incorrect .option-dot {
+      border-color: #ef4444;
+      background: #ef4444;
+    }
+
+    .quiz-explanation {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #10b981;
+      display: none;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+    }
+
+    .quiz-results-panel {
+      display: none;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 30px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND CANVAS & GLOWS -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="blur-glow-1"></div>
+  <div class="blur-glow-2"></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        Arbitrum Explorer
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="concepts.html" class="nav-link">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link">Block Simulator</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="prices.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
+          <i class="fa-solid fa-chart-line"></i> View Prices
+        </a>
+      </div>
+
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="section-padding" style="padding-top: 140px; padding-bottom: 20px;">
+    <div class="section-header reveal" style="margin-bottom: 20px;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 12px;">Learn Web3 <span class="text-gradient">Concepts</span></h1>
+      <p style="font-size: 1.2rem; color: var(--text-secondary);">Unlock the core foundations of decentralized technology and blockchain layers.</p>
+    </div>
+  </section>
+
+  <!-- CONCEPTS SECTIONS -->
+  <main class="section-padding" style="padding-top: 20px;">
+    <div class="concepts-container">
+
+      <!-- CONCEPT 1: WEB2 VS WEB3 -->
+      <section class="concept-section reveal" id="web2-web3">
+        <div class="glass-card" style="padding: 40px 30px;">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-globe text-gradient"></i>
+            <h3>Web2 vs Web3</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+            Web2 represents the current read-write internet dominated by centralized platforms. Web3 introduces the read-write-own model powered by cryptographic networks.
+          </p>
+
+          <!-- Glass Table -->
+          <div class="table-wrapper">
+            <table class="concept-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Web2 (Centralized Web)</th>
+                  <th>Web3 (Decentralized Web)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ownership</strong></td>
+                  <td>Companies own user data, content, and code.</td>
+                  <td>Users own their digital assets, identities, and data.</td>
+                </tr>
+                <tr>
+                  <td><strong>Control</strong></td>
+                  <td>Centralized servers (AWS, Google, Meta).</td>
+                  <td>Distributed node networks run by validators.</td>
+                </tr>
+                <tr>
+                  <td><strong>Login</strong></td>
+                  <td>OAuth (Sign in with Google) or Email/Password.</td>
+                  <td>Cryptographic wallet keypairs (Sign with MetaMask).</td>
+                </tr>
+                <tr>
+                  <td><strong>Payments</strong></td>
+                  <td>Fiat rails (Stripe, PayPal, wire transfers).</td>
+                  <td>Smart contracts processing digital tokens (ETH, stablecoins).</td>
+                </tr>
+                <tr>
+                  <td><strong>Storage</strong></td>
+                  <td>Cloud giants (Amazon S3, Google Cloud).</td>
+                  <td>Distributed storage networks (IPFS, Filecoin, Arweave).</td>
+                </tr>
+                <tr>
+                  <td><strong>Transparency</strong></td>
+                  <td>Closed-source databases, proprietary algorithms.</td>
+                  <td>Open-source smart contracts, auditable public ledger.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pros and Cons -->
+          <div class="pros-cons-grid">
+            <div class="pros-box">
+              <h5><i class="fa-solid fa-circle-check"></i> Web3 Advantages</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:#10b981;"></i> Censorship-resistant; content cannot be unilaterally deleted.</li>
+                <li><i class="fa-solid fa-plus" style="color:#10b981;"></i> Permissionless logins; no centralized platform can ban you.</li>
+                <li><i class="fa-solid fa-plus" style="color:#10b981;"></i> Programmable value and money natively integrated into websites.</li>
+              </ul>
+            </div>
+            <div class="cons-box">
+              <h5><i class="fa-solid fa-circle-xmark"></i> Web3 Drawbacks</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-minus" style="color:#ef4444;"></i> Higher complexity; users must protect their own key phrases.</li>
+                <li><i class="fa-solid fa-minus" style="color:#ef4444;"></i> Scalability issues; base L1 layer is slower and expensive.</li>
+                <li><i class="fa-solid fa-minus" style="color:#ef4444;"></i> Irreversible transactions; no customer support if you make a mistake.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DID YOU KNOW CARD 1 -->
+      <div class="dyk-card reveal">
+        <div class="dyk-icon">
+          <i class="fa-solid fa-lightbulb"></i>
+        </div>
+        <div class="dyk-content">
+          <h4>Did You Know?</h4>
+          <p>The term "Web3" was coined in 2014 by Gavin Wood, co-founder of Ethereum and creator of Polkadot, to describe an internet centered around decentralized trust.</p>
+        </div>
+      </div>
+
+      <!-- CONCEPT 2: BITCOIN VS ETHEREUM -->
+      <section class="concept-section reveal" id="btc-eth">
+        <div class="glass-card" style="padding: 40px 30px;">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-cubes-stacked text-gradient-purple"></i>
+            <h3>Bitcoin vs Ethereum</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+            While both are leading cryptographic networks, Bitcoin was engineered as a decentralized monetary system, whereas Ethereum serves as a decentralized software computer.
+          </p>
+
+          <div class="table-wrapper">
+            <table class="concept-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Bitcoin (BTC)</th>
+                  <th>Ethereum (ETH)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Purpose</strong></td>
+                  <td>Store of value, digital gold, peer-to-peer cash.</td>
+                  <td>Global smart contract executor, dApp platform.</td>
+                </tr>
+                <tr>
+                  <td><strong>Supply</strong></td>
+                  <td>Hard cap of 21 Million coins. Deflationary.</td>
+                  <td>No absolute cap; dynamic issuance based on usage burn.</td>
+                </tr>
+                <tr>
+                  <td><strong>Smart Contracts</strong></td>
+                  <td>Extremely limited (Script, non-Turing complete).</td>
+                  <td>Full Turing-complete smart contracts via EVM.</td>
+                </tr>
+                <tr>
+                  <td><strong>Speed</strong></td>
+                  <td>~7 Transactions/sec. Blocks mined every 10 mins.</td>
+                  <td>~15 Transactions/sec. Blocks resolved in ~12 seconds.</td>
+                </tr>
+                <tr>
+                  <td><strong>Consensus</strong></td>
+                  <td>Proof of Work (PoW) - ASIC hardware mining.</td>
+                  <td>Proof of Stake (PoS) - Staking validators.</td>
+                </tr>
+                <tr>
+                  <td><strong>Use Cases</strong></td>
+                  <td>Inflation hedge, payments, reserve asset.</td>
+                  <td>DeFi, NFTs, Layer 2 networks, decentralized identity.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DID YOU KNOW CARD 2 -->
+      <div class="dyk-card reveal">
+        <div class="dyk-icon">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="dyk-content">
+          <h4>Why Layer 2 networks build on Ethereum, not Bitcoin</h4>
+          <p>Ethereum's native Smart Contracts (Turing completeness) allow developers to write state-locking scripts. This enables L2s to securely prove off-chain calculations back on the L1 mainnet.</p>
+        </div>
+      </div>
+
+      <!-- CONCEPT 3: PUBLIC KEY VS PRIVATE KEY -->
+      <section class="concept-section reveal" id="keys">
+        <div class="glass-card" style="padding: 40px 30px;">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-key text-gradient"></i>
+            <h3>Public Key vs Private Key</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+            Web3 relies on asymmetric cryptography. You share your public address to receive assets, but use your private key to prove ownership and authorize actions.
+          </p>
+
+          <div class="table-wrapper">
+            <table class="concept-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Public Key (Address)</th>
+                  <th>Private Key (Seed Phrase)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Meaning</strong></td>
+                  <td>Your cryptographic address, similar to an IBAN/email.</td>
+                  <td>Your account signature passcode, similar to a banking PIN.</td>
+                </tr>
+                <tr>
+                  <td><strong>Visibility</strong></td>
+                  <td>Publicly visible. Safe to share with anyone.</td>
+                  <td>Strictly secret. Never share it under any circumstance.</td>
+                </tr>
+                <tr>
+                  <td><strong>Usage</strong></td>
+                  <td>Used to route assets to your wallet.</td>
+                  <td>Used to sign digital messages and authorize spend requests.</td>
+                </tr>
+                <tr>
+                  <td><strong>Security</strong></td>
+                  <td>Sharing poses no security threat.</td>
+                  <td>Loss of private key = absolute loss of all funds.</td>
+                </tr>
+                <tr>
+                  <td><strong>Examples</strong></td>
+                  <td><code>0x4facfe...00f2fe</code></td>
+                  <td>A 12-word seed phrase: <code>apple banana cherry...</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cons-box" style="background: rgba(239, 68, 68, 0.03); border: 1px solid rgba(239, 68, 68, 0.2); margin-top: 24px;">
+            <h5 style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> CRITICAL WARNING</h5>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              There is no "Forgot Password" in Web3. If you lose your private key or seed phrase, you lose access to your wallet forever. 
+              Anyone who gets access to your private key can steal all of your assets. Keep it written down offline, and never enter it into unverified websites.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DID YOU KNOW CARD 3 -->
+      <div class="dyk-card reveal">
+        <div class="dyk-icon">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div class="dyk-content">
+          <h4>Optimistic vs Zero-Knowledge (ZK) Rollups</h4>
+          <p>Optimistic rollups (like Arbitrum) assume transactions are valid by default and provide a challenge period. ZK rollups generate mathematical cryptographic proofs (SNARKs) to prove validity instantly.</p>
+        </div>
+      </div>
+
+      <!-- CONCEPT 4: BLOCKCHAIN VS TRADITIONAL DATABASE -->
+      <section class="concept-section reveal" id="db-blockchain">
+        <div class="glass-card" style="padding: 40px 30px;">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-database text-gradient-purple"></i>
+            <h3>Blockchain vs Database</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+            Both databases and blockchains record transactions and state information, but they solve entirely different problems regarding centralized authority, write permissions, and trust.
+          </p>
+
+          <div class="table-wrapper">
+            <table class="concept-table">
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Traditional Database (SQL / NoSQL)</th>
+                  <th>Blockchain (e.g. Arbitrum, Ethereum)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ownership</strong></td>
+                  <td>Controlled by a single organization or system admin.</td>
+                  <td>Shared across a global network of independent nodes.</td>
+                </tr>
+                <tr>
+                  <td><strong>Security</strong></td>
+                  <td>Access control lists, firewalls, and server credentials.</td>
+                  <td>Cryptographic verification, consensus protocols.</td>
+                </tr>
+                <tr>
+                  <td><strong>Transparency</strong></td>
+                  <td>Private logs accessible only to internal personnel.</td>
+                  <td>Publicly viewable block explorer and transaction record.</td>
+                </tr>
+                <tr>
+                  <td><strong>Editing</strong></td>
+                  <td>Full CRUD support: Create, Read, Update, Delete.</td>
+                  <td>Append-only logs. Data cannot be deleted or modified.</td>
+                </tr>
+                <tr>
+                  <td><strong>Trust</strong></td>
+                  <td>Users must trust the system administrator.</td>
+                  <td>Trustless. Mathematics and cryptography enforce rules.</td>
+                </tr>
+                <tr>
+                  <td><strong>Examples</strong></td>
+                  <td>PostgreSQL, MongoDB, Oracle, MySQL.</td>
+                  <td>Arbitrum, Ethereum, Bitcoin, Solana.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CONCEPT 5: OPTIMISTIC ROLLUPS VS ZK-ROLLUPS -->
+      <section class="concept-section reveal" id="optimistic-zk-rollups">
+        <div class="glass-card" style="padding: 40px 30px;">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-arrows-spin text-gradient"></i>
+            <h3>Optimistic Rollups vs Zero-Knowledge (ZK) Rollups</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+            Optimistic and ZK-Rollups are the two dominant architectures for scaling Ethereum L2. While both bundle transactions off-chain, their validation proofs use completely different logic.
+          </p>
+
+          <!-- Glass Table -->
+          <div class="table-wrapper">
+            <table class="concept-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Optimistic Rollups (e.g. Arbitrum, Optimism)</th>
+                  <th>Zero-Knowledge Rollups (e.g. zkSync, Starknet)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Validity Proofs</strong></td>
+                  <td>None posted on-chain by default. Assumed valid unless challenged.</td>
+                  <td>Mathematical validity proofs (SNARKs/STARKs) posted with every batch.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dispute Mechanism</strong></td>
+                  <td>Fraud Proofs. Requires a 7-day challenge window.</td>
+                  <td>No disputes. Cryptographic math proves execution correctness.</td>
+                </tr>
+                <tr>
+                  <td><strong>Withdrawal Finality</strong></td>
+                  <td>Takes ~7 days due to the dispute challenge window.</td>
+                  <td>Near-instant (takes only as long to generate/verify proof, ~1 hour).</td>
+                </tr>
+                <tr>
+                  <td><strong>Throughput</strong></td>
+                  <td>High. (Up to 40,000 TPS).</td>
+                  <td>Extremely high. (Calculations are compressed mathematically).</td>
+                </tr>
+                <tr>
+                  <td><strong>EVM Compatibility</strong></td>
+                  <td>Excellent. Almost 100% bytecode identical to Ethereum L1.</td>
+                  <td>Difficult. Requires complex ZK compilers (solidity to custom assembly).</td>
+                </tr>
+                <tr>
+                  <td><strong>Cost</strong></td>
+                  <td>Extremely cheap (Simple execution logs posted to L1).</td>
+                  <td>Slightly higher L2 computation costs (generating proofs is heavy).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pros and Cons -->
+          <div class="pros-cons-grid">
+            <div class="pros-box" style="background: rgba(0, 242, 254, 0.01); border-color: rgba(0, 242, 254, 0.15);">
+              <h5 style="color: var(--accent-cyan);"><i class="fa-solid fa-circle-check"></i> Optimistic Rollup (Arbitrum) Edge</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Instantly compatible with all Ethereum toolings (Hardhat, Foundry, Remix).</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Lower processing costs for simple transactions.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-cyan);"></i> Battle-tested in production with billions of dollars locked.</li>
+              </ul>
+            </div>
+            <div class="cons-box" style="background: rgba(139, 92, 246, 0.01); border-color: rgba(139, 92, 246, 0.15);">
+              <h5 style="color: var(--accent-purple);"><i class="fa-solid fa-circle-check"></i> ZK-Rollup Edge</h5>
+              <ul class="bullet-list">
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-purple);"></i> Instant withdraws from L2 to L1 (no 7-day waiting periods).</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-purple);"></i> Mathematically proven security that doesn't rely on validators challenging fraud.</li>
+                <li><i class="fa-solid fa-plus" style="color:var(--accent-purple);"></i> Better for enterprise transfers and massive batch scaling.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DID YOU KNOW CARD 4 -->
+      <div class="dyk-card reveal">
+        <div class="dyk-icon">
+          <i class="fa-solid fa-database"></i>
+        </div>
+        <div class="dyk-content">
+          <h4>What are Ethereum Blobs (EIP-4844)?</h4>
+          <p>EIP-4844 introduced temporary data packets called "Blobs" to Ethereum L1. Instead of storing rollup transaction data forever on L1 (which is very expensive), blobs discard the data after 18 days, reducing Arbitrum gas fees by over 90%!</p>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE COMPONENT 1: WEB3 WALLET & CRYPTOGRAPHIC SIGNATURE SANDBOX -->
+      <section class="concept-section reveal" id="wallet-sandbox-section">
+        <div class="glass-card" style="padding: 40px 30px;">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-wallet text-gradient"></i>
+            <h3>Web3 Wallet & Cryptographic Signature Sandbox</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1rem;">
+            Web3 relies on cryptographic keys to establish identities and authorize actions. 
+            Connect a mock wallet below to sign message transactions and inspect how private key signatures verify data ownership.
+          </p>
+
+          <!-- Sandbox Area -->
+          <div class="wallet-sandbox">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;" id="wallet-connect-prompt">
+              <i class="fa-solid fa-circle-nodes text-gradient-purple" style="font-size: 3rem; margin-bottom: 20px; animation: bulb-pulse 2s infinite alternate;"></i>
+              <h4 style="font-size: 1.3rem; margin-bottom: 8px;">No Wallet Connected</h4>
+              <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 400px; margin-bottom: 24px;">
+                Authenticate mock public keys to simulate decentralized signatures. No browser wallet installation required.
+              </p>
+              <button class="btn btn-primary" id="sim-connect-btn">
+                <i class="fa-solid fa-wallet"></i> Connect Mock Wallet
+              </button>
+            </div>
+
+            <!-- Connected Interface Panel -->
+            <div class="wallet-connected-panel" id="wallet-connected-panel">
+              <div class="wallet-meta-row">
+                <div class="wallet-meta-item">
+                  <label>Mock Public Key Address</label>
+                  <span class="monospace-text text-gradient" style="font-size: 0.95rem;">0x71C24BD876Ec4318976C47A25425425425428976</span>
+                </div>
+                <div class="wallet-meta-item">
+                  <label>Decentralized Balance</label>
+                  <span>12.45 ARB <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">/ 0.42 ETH</span></span>
+                </div>
+                <div class="wallet-meta-item">
+                  <label>Connection Status</label>
+                  <span style="color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.3);"><i class="fa-solid fa-circle"></i> Connected</span>
+                </div>
+              </div>
+
+              <!-- Message signing -->
+              <div class="signature-sandbox-area">
+                <h4 style="font-size: 1.15rem; margin-bottom: 4px;">Sign Transaction Message</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">
+                  Type any mock text payload below. Clicking "Sign" represents using your Private Key to sign the message hash, producing an auditable cryptographic signature proof.
+                </p>
+                <textarea id="sim-sign-message" rows="3" class="monospace-text" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); color: var(--text-primary);" autocomplete="off">Arbitrum Explorer Signature Proof: Approve spend of 5.00 ARB on Uniswap v3</textarea>
+                
+                <button class="btn btn-secondary" id="sim-sign-btn" style="align-self: flex-start; margin-top: 10px;">
+                  <i class="fa-solid fa-pen-nib"></i> Sign Message
+                </button>
+              </div>
+
+              <!-- Signature Output Box -->
+              <div class="signature-output-box" id="signature-output-box">
+                <h5 style="color: #10b981; font-size: 1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-square-check"></i> Cryptographic Signature Generated!
+                </h5>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5;">
+                  This proof string is mathematically derived from the message payload and your mock private key. Anyone on the node network can verify it using your public key address to prove *you* signed it.
+                </p>
+                <div class="monospace-text" id="sim-signature-text" style="background: rgba(16, 185, 129, 0.08); border: 1px dashed rgba(16,185,129,0.25); border-radius: 8px; padding: 12px; word-break: break-all; font-size: 0.85rem; color: #10b981;">
+                  0x8c78b401c296efbc82d029f8f2e2f6946e492576fc939bbbd00fef01c2389a01...d8f4
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- INTERACTIVE COMPONENT 2: INTERACTIVE KNOWLEDGE QUIZ -->
+      <section class="concept-section reveal" id="quiz-sandbox-section">
+        <div class="glass-card quiz-card">
+          
+          <div class="concept-title-bar">
+            <i class="fa-solid fa-graduation-cap text-gradient-purple"></i>
+            <h3>Web3 Scaling & Cryptography Quiz</h3>
+          </div>
+          
+          <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem;">
+            Test your understanding of the Web3 scaling concepts, asymmetric cryptography, and rollups. Select one option for each question and verify your score.
+          </p>
+
+          <form id="web3-quiz" onsubmit="return false;">
+            
+            <!-- Question 1 -->
+            <div class="quiz-question" data-question="1">
+              <h4>1. What does an Optimistic Rollup (such as Arbitrum) do?</h4>
+              <div class="quiz-options">
+                <div class="quiz-option" data-option="a">
+                  <span class="option-dot"></span>
+                  <span>Translates smart contracts from Solidity to Python code.</span>
+                </div>
+                <div class="quiz-option" data-option="b">
+                  <span class="option-dot"></span>
+                  <span>Bundles transactions off-chain and submits them to Ethereum L1, assuming validity by default.</span>
+                </div>
+                <div class="quiz-option" data-option="c">
+                  <span class="option-dot"></span>
+                  <span>Deletes historic block state from mainnet to reduce local hard drive footprint.</span>
+                </div>
+              </div>
+              <div class="quiz-explanation" id="q1-explanation">
+                <strong>Correct!</strong> Rollups bundle thousands of transactions off-chain, compressing data before posting it to L1. They are "Optimistic" because they assume transactions are valid unless challenged by a node.
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-question" data-question="2">
+              <h4>2. Which cryptographic key should you NEVER share under any circumstance?</h4>
+              <div class="quiz-options">
+                <div class="quiz-option" data-option="a">
+                  <span class="option-dot"></span>
+                  <span>Your Public Wallet Key Address (used to receive funds).</span>
+                </div>
+                <div class="quiz-option" data-option="b">
+                  <span class="option-dot"></span>
+                  <span>Your Private key / 12-word seed phrase (passcode to sign and spend).</span>
+                </div>
+                <div class="quiz-option" data-option="c">
+                  <span class="option-dot"></span>
+                  <span>Your custom dApp interface name tag.</span>
+                </div>
+              </div>
+              <div class="quiz-explanation" id="q2-explanation">
+                <strong>Correct!</strong> Your Private Key proves absolute ownership of address assets. If leaked, your wallet can be completely drained without any recovery option.
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-question" data-question="3">
+              <h4>3. What is the role of a Nonce in Proof of Work mining?</h4>
+              <div class="quiz-options">
+                <div class="quiz-option" data-option="a">
+                  <span class="option-dot"></span>
+                  <span>A static transaction fee multiplier token.</span>
+                </div>
+                <div class="quiz-option" data-option="b">
+                  <span class="option-dot"></span>
+                  <span>An arbitrary number altered by miners to change the output hash, matching the zero-prefix difficulty.</span>
+                </div>
+                <div class="quiz-option" data-option="c">
+                  <span class="option-dot"></span>
+                  <span>An identity name tag to login to MetaMask.</span>
+                </div>
+              </div>
+              <div class="quiz-explanation" id="q3-explanation">
+                <strong>Correct!</strong> Miners continuously iterate the Nonce value. Since the input data is fixed, changing the Nonce changes the SHA-256 output, allowing miners to look for a hash that satisfies the leading-zero difficulty.
+              </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+              <button class="btn btn-primary" id="quiz-submit-btn">Verify Answers</button>
+              <button class="btn btn-secondary" id="quiz-reset-btn" style="display: none;">Reset Quiz</button>
+            </div>
+
+            <!-- Results status row -->
+            <div class="quiz-results-panel" id="quiz-results-panel">
+              <h4 style="font-size: 1.4rem; margin-bottom: 8px;" id="quiz-results-title">Quiz Results</h4>
+              <p style="color: var(--text-secondary); margin-bottom: 0; font-size: 1rem;" id="quiz-results-score">Your Score: 0/3</p>
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- END PAGE CTA SECTION -->
+  <section class="cta-section section-padding">
+    <div class="glass-card reveal" style="padding: 60px 40px; text-align: center; border-radius: 24px; background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), rgba(0, 242, 254, 0.05)); border: 1px solid rgba(255, 255, 255, 0.1);">
+      <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Ready to See Live Market Metrics?</h2>
+      <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 36px auto; font-size: 1.1rem;">
+        Check out L2 fee comparisons, token valuations, and active gas details on our Live Prices dashboard.
+      </p>
+      <a href="prices.html" class="btn btn-primary" style="padding: 14px 36px; font-size: 1.1rem;">
+        View Live Prices <i class="fa-solid fa-chart-line"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- SHARED FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            Arbitrum Explorer
+          </a>
+          <p>Analyzing, exploring, and scaling Ethereum through Optimistic Rollup architectures. Your guide to decentralized scaling layers.</p>
+        </div>
+
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="social-icon" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Arbitrum Explorer. All rights reserved.</p>
+        <div class="footer-meta">
+          <span><i class="fa-solid fa-user"></i> Hetut</span>
+          <span><i class="fa-solid fa-code-fork"></i> Batch: Web3-Frontends-2026</span>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="fa-brands fa-github-alt"></i> Github Repository
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/concepts.js"></script>
+</body>
+</html>

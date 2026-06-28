@@ -1,0 +1,207 @@
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+/* Large screens and desktops (adjustments for standard containers) */
+@media (max-width: 1200px) {
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Tablets and small desktops */
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .section-padding {
+    padding: 80px 6%;
+  }
+
+  .section-header {
+    margin-bottom: 50px;
+  }
+}
+
+/* Mobile & Tablets (Collapse Nav Menu) */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .section-padding {
+    padding: 60px 5%;
+  }
+
+  .section-header h2 {
+    font-size: 2.2rem;
+  }
+
+  /* Shared Navbar Hamburger Stack */
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 380px;
+    height: 100vh;
+    background: rgba(8, 5, 22, 0.95);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-left: 1px solid var(--border-color);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 40px;
+    gap: 40px;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+  }
+
+  .nav-menu.open {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.3rem;
+    width: 100%;
+  }
+
+  .nav-actions {
+    display: none; /* Hide secondary desktop action on mobile navbar to avoid clutter */
+  }
+
+  /* Scale Home and Concepts typography */
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem !important;
+  }
+
+  .hero-cta {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-illustration {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  .section-padding {
+    padding: 50px 4%;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.4rem !important;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+
+/* ==========================================================================
+   PRICES & SIMULATOR RESPONSIVENESS OVERRIDES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .prices-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .prices-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Stack mining blocks vertically */
+  .simulator-container {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .simulator-block-card {
+    width: 100% !important;
+  }
+  
+  /* Connector adjustment for vertical stack */
+  .block-connector {
+    width: 100% !important;
+    height: 50px !important;
+  }
+  
+  .connector-svg {
+    width: 40px !important;
+    height: 50px !important;
+  }
+  
+  /* Swap horizontal line to vertical line */
+  .path-horizontal {
+    display: none !important;
+  }
+  
+  .path-vertical {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .path-horizontal {
+    display: block !important;
+  }
+  
+  .path-vertical {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .estimator-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+
