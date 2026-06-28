@@ -89,14 +89,14 @@ Then open `http://localhost:8000` in your browser.
 
 ---
 
-## 🔌 API Integrations Used
+##  API Integrations Used
 - **CoinGecko Simple Price API**:
   `https://api.coingecko.com/api/v3/simple/price`
   - Returns current valuations and 24-hour change rates.
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 1. **Wallet Connection Mockups**: Integrate mock wallet connection triggers ("Connect MetaMask") inside the navbar.
 2. **Gas Optimization Statistics**: Introduce live charts parsing average L2 saving parameters compared to Ethereum Mainnet gas spikes.
 3. **ZK-Rollup Sandbox Mode**: Build alternative tabs inside the block simulator showing zero-knowledge prover mechanics.
@@ -110,5 +110,5 @@ Then open `http://localhost:8000` in your browser.
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the MIT License - see the LICENSE details for info.
