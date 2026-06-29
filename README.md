@@ -2,7 +2,7 @@
 
 A premium, production-quality, fully responsive multi-page Web3 startup showcase platform built using HTML, CSS, and Vanilla JavaScript only. The website highlights the scale, concepts, metrics, and security mechanisms of the Arbitrum Layer 2 scaling ecosystem.
 
-## 📸 Screenshots
+##  Screenshots
 
 ### 1. Home Page
 ![Home Page](screenshots/home.png)
