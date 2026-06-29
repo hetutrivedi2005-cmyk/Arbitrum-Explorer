@@ -2,6 +2,22 @@
 
 A premium, production-quality, fully responsive multi-page Web3 startup showcase platform built using HTML, CSS, and Vanilla JavaScript only. The website highlights the scale, concepts, metrics, and security mechanisms of the Arbitrum Layer 2 scaling ecosystem.
 
+## 📸 Screenshots
+
+### 1. Home Page
+![Home Page](screenshots/home.png)
+
+### 2. Concepts Page
+![Concepts Page](screenshots/concepts.png)
+
+### 3. Live Prices Page
+![Live Prices Page](screenshots/prices.png)
+
+### 4. Block Simulator Page
+![Block Simulator Page](screenshots/simulator.png)
+
+---
+
 ##  Key Features
 
 ### 1. Global Core Components
@@ -106,7 +122,7 @@ Then open `http://localhost:8000` in your browser.
 ##  Author
 - **Name**: Het Trivedi
 - **Batch**: Web3-Frontends-2026
-- **GitHub Repository**: [https://github.com](https://github.com)
+- **GitHub Repository**: [https://github.com/hetutrivedi2005-cmyk/Arbitrum-Explorer](https://github.com/hetutrivedi2005-cmyk/Arbitrum-Explorer)
 
 ---
 
